@@ -39,19 +39,26 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         [HttpGet("all")]
         public IActionResult GetAllUsers()
         {
-            var users = _userContext.Users.Include(x => x.Role).Select(x => new
+            try
             {
-                id = x.Id,
-                username = x.Username,
-                email = x.Email,
-                role = x.Role.Code
-            }).ToList();
+                var users = _userContext.Users.Include(x => x.Role).Select(x => new
+                {
+                    id = x.Id,
+                    username = x.Username,
+                    email = x.Email,
+                    role = x.Role.Code
+                }).ToList();
 
-            return Json(new
+                return Json(new
+                {
+                    status = true,
+                    data = users
+                });
+            }
+            catch (Exception e)
             {
-                status = true,
-                data = users
-            });
+                return BadRequest(new {status = false, message = e.Message});
+            }
         }
 
         /// <summary>
@@ -64,27 +71,32 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         [HttpGet("{id}")]
         public IActionResult GetUser([FromRoute] int id)
         {
-            var user = _userContext.Users.Include(x => x.Role).Select(x => new
+            try
             {
-                id = x.Id,
-                username = x.Username,
-                email = x.Email,
-                role = x.Role.Code
-            }).FirstOrDefault(x => x.id == id);
-            if (user == null)
-            {
-                return BadRequest(new
+                var user = _userContext.Users.Include(x => x.Role).Select(x => new
                 {
-                    status = false,
-                    message = "Such user doesn't exist"
+                    id = x.Id,
+                    username = x.Username,
+                    email = x.Email,
+                    role = x.Role.Code
+                }).FirstOrDefault(x => x.id == id);
+                if (user == null)
+                    return NotFound(new
+                    {
+                        status = false,
+                        message = "Such user doesn't exist"
+                    });
+
+                return Json(new
+                {
+                    status = true,
+                    data = user
                 });
             }
-
-            return Json(new
+            catch (Exception e)
             {
-                status = true,
-                data = user
-            });
+                return BadRequest(new {status = false, message = e.Message});
+            }
         }
 
         /// <summary>
@@ -123,14 +135,23 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         [HttpGet]
         public IActionResult GetCurrentUser()
         {
-            var user = _userContext.Users.Include(x => x.Role).Select(x => new
+            try
             {
-                id = x.Id,
-                username = x.Username,
-                email = x.Email,
-                role = x.Role.Code
-            }).FirstOrDefault(x => x.username == User.Identity.Name);
-            return Json(new {status = true, data = user});
+                var user = _userContext.Users.Include(x => x.Role).Select(x => new
+                {
+                    id = x.Id,
+                    username = x.Username,
+                    email = x.Email,
+                    role = x.Role.Code
+                }).FirstOrDefault(x => x.username == User.Identity.Name);
+                if (user == null)
+                    return NotFound(new {status = false, message = "There is no such user in DB"});
+                return Json(new {status = true, data = user});
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {status = false, message = e.Message});
+            }
         }
 
         /// <summary>

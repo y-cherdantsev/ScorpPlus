@@ -46,21 +46,21 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         [HttpPost("register")]
         public async Task<IActionResult> PostRegister([FromBody] User user)
         {
-            if (user.Username == null) return BadRequest(new {status = false, message = "Username field is empty"});
-            if (user.Password == null) return BadRequest(new {status = false, message = "Password field is empty"});
-            if (user.Username.Length < 6) return BadRequest(new {status = false, message = "Username too short"});
-            if (user.Password.Length < 6) return BadRequest(new {status = false, message = "Password too short"});
-
-            if (_userContext.Users.FirstOrDefault(x => x.Username == user.Username) != null)
-                return StatusCode((int) HttpStatusCode.Conflict,
-                    new {status = false, message = "User with given username already exists"});
-
-            var guestRole = _userContext.Roles.FirstOrDefault(x => x.Code == "guest");
-            user.Role = guestRole;
-            user.RoleId = guestRole!.Id;
-
             try
             {
+                if (user.Username == null) return BadRequest(new {status = false, message = "Username field is empty"});
+                if (user.Password == null) return BadRequest(new {status = false, message = "Password field is empty"});
+                if (user.Username.Length < 6) return BadRequest(new {status = false, message = "Username too short"});
+                if (user.Password.Length < 6) return BadRequest(new {status = false, message = "Password too short"});
+
+                if (_userContext.Users.FirstOrDefault(x => x.Username == user.Username) != null)
+                    return StatusCode((int) HttpStatusCode.Conflict,
+                        new {status = false, message = "User with given username already exists"});
+
+                var guestRole = _userContext.Roles.FirstOrDefault(x => x.Code == "guest");
+                user.Role = guestRole;
+                user.RoleId = guestRole!.Id;
+                
                 await _userContext.Users.AddAsync(user);
                 await _userContext.SaveChangesAsync();
                 return Json(new {status = true, data = user});
