@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "e0ea08c2-15d6-4250-97d5-deeabe441a6b",
+		"name": "ScorpPlusApi",
+		"description": "ScorpPlusApi .NET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "AuthorizationController",
+					"item": [
+						{
+							"name": "PostRegister",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/authorization/register?username=username&password=password",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"authorization",
+										"register"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "username"
+										},
+										{
+											"key": "password",
+											"value": "password"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostLogin",
+							"protocolProfileBehavior": {
+								"strictSSL": false,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/authorization/login?username=username&password=password",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"authorization",
+										"login"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "username"
+										},
+										{
+											"key": "password",
+											"value": "password"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "UserController",
+					"item": [
+						{
+							"name": "GetAllUsers",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjEyODkwNiwiZXhwIjoxNjA2MTI4OTY2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.fkdZELTRR3ztzmiGCNk-uJu4qwJ1M-wsu9mvlUVkBUc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/user/all",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetUser",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjEyODkwNiwiZXhwIjoxNjA2MTI4OTY2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.fkdZELTRR3ztzmiGCNk-uJu4qwJ1M-wsu9mvlUVkBUc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/user/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteUser",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjEyODkwNiwiZXhwIjoxNjA2MTI4OTY2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.fkdZELTRR3ztzmiGCNk-uJu4qwJ1M-wsu9mvlUVkBUc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/user/8",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCurrentUser",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjEyODkwNiwiZXhwIjoxNjA2MTI4OTY2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.fkdZELTRR3ztzmiGCNk-uJu4qwJ1M-wsu9mvlUVkBUc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/user",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCurrentUser",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjEyODkwNiwiZXhwIjoxNjA2MTI4OTY2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.fkdZELTRR3ztzmiGCNk-uJu4qwJ1M-wsu9mvlUVkBUc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/user",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
