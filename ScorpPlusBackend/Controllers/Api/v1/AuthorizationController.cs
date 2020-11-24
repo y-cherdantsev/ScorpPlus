@@ -41,6 +41,8 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// <code>POST /register</code>
         /// <param name="user">User object</param>
         /// <returns>Response with result status</returns>
+        /// \todo(Improve username and password validation)
+        /// \todo(Add email validation)
         [HttpPost("register")]
         public async Task<IActionResult> PostRegister([FromBody] User user)
         {
@@ -114,6 +116,18 @@ namespace ScorpPlusBackend.Controllers.Api.v1
             };
 
             return Json(response);
+        }
+
+        /// <summary>
+        /// Logout route
+        /// </summary>
+        /// <code>POST /logout</code>
+        /// <returns>Response with result status</returns>
+        /// \todo(Implement logout)
+        [HttpPost("logout")]
+        public IActionResult PostLogout()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -82,6 +82,42 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "PostLogout",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjEyODkwNiwiZXhwIjoxNjA2MTI4OTY2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.fkdZELTRR3ztzmiGCNk-uJu4qwJ1M-wsu9mvlUVkBUc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/authorization/logout",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"authorization",
+										"logout"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
