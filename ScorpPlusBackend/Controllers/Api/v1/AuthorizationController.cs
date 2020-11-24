@@ -40,7 +40,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// </summary>
         /// <code>POST /register</code>
         /// <param name="user">User object</param>
-        /// <returns>Response with result status</returns>
+        /// <returns>Response with result status and created user</returns>
         /// \todo(Improve username and password validation)
         /// \todo(Add email validation)
         [HttpPost("register")]

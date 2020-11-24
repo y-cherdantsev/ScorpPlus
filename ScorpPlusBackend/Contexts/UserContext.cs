@@ -24,29 +24,12 @@ namespace ScorpPlusBackend.Contexts
         public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
         }
 
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>().HasIndex(x => x.Code).IsUnique();
-            modelBuilder.Entity<Role>().HasData(
-                new Role
-                {
-                    Id = 1,
-                    Code = "admin"
-                },
-                new Role
-                {
-                    Id = 2,
-                    Code = "manager"
-                },
-                new Role
-                {
-                    Id = 3,
-                    Code = "guest"
-                });
 
             modelBuilder.Entity<User>().HasIndex(x => x.Username).IsUnique();
             modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();

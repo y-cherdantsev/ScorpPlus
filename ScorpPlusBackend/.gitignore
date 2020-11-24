@@ -1,4 +1,6 @@
 bin
 obj
+docs
 appsettings.json
 appsettings.Development.json
+fill_database.sql

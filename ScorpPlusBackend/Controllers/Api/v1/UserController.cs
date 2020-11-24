@@ -114,7 +114,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 var user = _userContext.Users.FirstOrDefault(x => x.Id == id);
                 if (user == null)
                     return NotFound(new {status = false, message = "There is no such user in DB"});
-                _userContext.Remove(user);
+                _userContext.Users.Remove(user);
                 await _userContext.SaveChangesAsync();
                 return Json(new
                 {
@@ -167,7 +167,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 var user = _userContext.Users.FirstOrDefault(x => x.Username == User.Identity.Name);
                 if (user == null)
                     return NotFound(new {status = false, message = "There is no such user in DB"});
-                _userContext.Remove(user!);
+                _userContext.Users.Remove(user!);
                 await _userContext.SaveChangesAsync();
                 return Json(new
                 {
