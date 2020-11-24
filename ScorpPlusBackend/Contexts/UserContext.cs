@@ -30,9 +30,6 @@ namespace ScorpPlusBackend.Contexts
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasIndex(x => x.Username).IsUnique();
-            modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
-
             modelBuilder.Entity<Role>().HasIndex(x => x.Code).IsUnique();
             modelBuilder.Entity<Role>().HasData(
                 new Role
@@ -50,6 +47,9 @@ namespace ScorpPlusBackend.Contexts
                     Id = 3,
                     Code = "guest"
                 });
+
+            modelBuilder.Entity<User>().HasIndex(x => x.Username).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
         }
     }
 }
