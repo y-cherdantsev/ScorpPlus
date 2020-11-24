@@ -21,8 +21,17 @@
 							"request": {
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"username\",\r\n    \"password\":\"password\",\r\n    \"email\":\"email@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "https://localhost:5051/api/v1/authorization/register?username=username&password=password",
+									"raw": "https://localhost:5051/api/v1/authorization/register",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -33,16 +42,6 @@
 										"v1",
 										"authorization",
 										"register"
-									],
-									"query": [
-										{
-											"key": "username",
-											"value": "username"
-										},
-										{
-											"key": "password",
-											"value": "password"
-										}
 									]
 								}
 							},

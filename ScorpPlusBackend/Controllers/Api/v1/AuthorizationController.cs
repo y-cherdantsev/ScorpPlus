@@ -39,28 +39,23 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// Registration route
         /// </summary>
         /// <code>POST /register</code>
-        /// <param name="username">Username of an user</param>
-        /// <param name="password">Password of an user</param>
+        /// <param name="user">User object</param>
         /// <returns>Response with result status</returns>
         [HttpPost("register")]
-        public async Task<IActionResult> PostRegister(string username, string password)
+        public async Task<IActionResult> PostRegister([FromBody] User user)
         {
-            if (username == null) return BadRequest(new {status = false, message = "Username field is empty"});
-            if (password == null) return BadRequest(new {status = false, message = "Password field is empty"});
-            if (username.Length < 6) return BadRequest(new {status = false, message = "Username too short"});
-            if (password.Length < 6) return BadRequest(new {status = false, message = "Password too short"});
+            if (user.Username == null) return BadRequest(new {status = false, message = "Username field is empty"});
+            if (user.Password == null) return BadRequest(new {status = false, message = "Password field is empty"});
+            if (user.Username.Length < 6) return BadRequest(new {status = false, message = "Username too short"});
+            if (user.Password.Length < 6) return BadRequest(new {status = false, message = "Password too short"});
 
-            if (_userContext.Users.FirstOrDefault(x => x.Username == username) != null)
+            if (_userContext.Users.FirstOrDefault(x => x.Username == user.Username) != null)
                 return StatusCode((int) HttpStatusCode.Conflict,
                     new {status = false, message = "User with given username already exists"});
 
-            var generalRole = _userContext.Roles.FirstOrDefault(x => x.Code == "guest");
-            var user = new User
-            {
-                Username = username,
-                Password = password,
-                RoleId = generalRole!.Id
-            };
+            var guestRole = _userContext.Roles.FirstOrDefault(x => x.Code == "guest");
+            user.Role = guestRole;
+            user.RoleId = guestRole!.Id;
 
             try
             {
