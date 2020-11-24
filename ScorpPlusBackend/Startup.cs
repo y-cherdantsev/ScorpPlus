@@ -36,8 +36,12 @@ namespace ScorpPlusBackend
         public void ConfigureServices(IServiceCollection services)
         {
             // Adding DB contexts
+            var dbConnectionString = Configuration.GetConnectionString("ScorpPlusDb");
+
             services.AddDbContext<UserContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("ScorpPlusDb")), ServiceLifetime.Transient);
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<EmployeeContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
 
             // Configuring JWT service
             var jwtConfiguration = Configuration.GetSection("Jwt");
