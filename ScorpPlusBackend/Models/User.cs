@@ -51,7 +51,6 @@ namespace ScorpPlusBackend.Models
         /// <summary>
         /// Role reference
         /// </summary>
-
         public Role Role { get; set; }
     }
 
