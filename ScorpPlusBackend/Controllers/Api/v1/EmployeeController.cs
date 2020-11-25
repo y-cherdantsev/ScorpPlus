@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ScorpPlusBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using ScorpPlusBackend.Contexts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ScorpPlusBackend.Controllers.Api.v1
@@ -42,7 +43,18 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         {
             try
             {
-                var employees = _employeeContext.Employees.ToList();
+                // Get data
+                var employees = _employeeContext.Employees
+                    .Include(x => x.Accesses)
+                    .ThenInclude(x => x.Room)
+                    .ToList();
+
+                // Remove redundant data
+                employees.ForEach(employee => employee.Accesses.ForEach(access =>
+                {
+                    access.Employee = null;
+                    access.Room.Accesses = null;
+                }));
 
                 return Json(new
                 {
@@ -68,13 +80,25 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         {
             try
             {
-                var employee = _employeeContext.Employees.FirstOrDefault(x => x.Id == id);
+                // Get data
+                var employee = _employeeContext.Employees
+                    .Include(x => x.Accesses)
+                    .ThenInclude(x => x.Room)
+                    .FirstOrDefault(x => x.Id == id);
+
                 if (employee == null)
                     return NotFound(new
                     {
                         status = false,
                         message = "Such employee doesn't exist"
                     });
+
+                // Remove redundant data
+                employee.Accesses.ForEach(access =>
+                {
+                    access.Employee = null;
+                    access.Room.Accesses = null;
+                });
 
                 return Json(new
                 {

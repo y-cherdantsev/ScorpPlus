@@ -314,7 +314,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjIxMDcxMCwiZXhwIjoxNjA2MjEwNzcwLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.ciXI-y7-dxdj0ZcK61TslInjQCZbLHWkxVDyR3TBu2Q",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -349,7 +349,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjIxMDcxMCwiZXhwIjoxNjA2MjEwNzcwLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.ciXI-y7-dxdj0ZcK61TslInjQCZbLHWkxVDyR3TBu2Q",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -357,7 +357,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:5051/api/v1/employee/24",
+									"raw": "https://localhost:5051/api/v1/employee/25",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -367,7 +367,7 @@
 										"api",
 										"v1",
 										"employee",
-										"24"
+										"25"
 									]
 								}
 							},
@@ -381,7 +381,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjI4NDYyOSwiZXhwIjoxNjA2Mjk5MDI5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.omaS9HsxuE6kdJuO30ekyudh4-ujqc1DozVBMWjpHSc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -463,7 +463,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjI4NDYyOSwiZXhwIjoxNjA2Mjk5MDI5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.omaS9HsxuE6kdJuO30ekyudh4-ujqc1DozVBMWjpHSc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -490,7 +490,8 @@
 						{
 							"name": "GetRoom",
 							"protocolProfileBehavior": {
-								"strictSSL": false
+								"strictSSL": false,
+								"disabledSystemHeaders": {}
 							},
 							"request": {
 								"auth": {
@@ -498,7 +499,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjI4NDYyOSwiZXhwIjoxNjA2Mjk5MDI5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.omaS9HsxuE6kdJuO30ekyudh4-ujqc1DozVBMWjpHSc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -506,17 +507,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:5051/api/v1/room/1",
-									"protocol": "https",
+									"raw": "http://localhost:5050/api/v1/room/2",
+									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "5051",
+									"port": "5050",
 									"path": [
 										"api",
 										"v1",
 										"room",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -530,7 +531,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjI4NDYyOSwiZXhwIjoxNjA2Mjk5MDI5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.omaS9HsxuE6kdJuO30ekyudh4-ujqc1DozVBMWjpHSc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -573,7 +574,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjI4NDYyOSwiZXhwIjoxNjA2Mjk5MDI5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.omaS9HsxuE6kdJuO30ekyudh4-ujqc1DozVBMWjpHSc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
 											"type": "string"
 										}
 									]
@@ -592,6 +593,155 @@
 										"v1",
 										"room",
 										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "AccessController",
+					"item": [
+						{
+							"name": "GetAllAccesses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access/all",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAccess",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostAccess",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"employeeId\":27,\r\n    \"roomId\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAccess",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access",
+										"4"
 									]
 								}
 							},

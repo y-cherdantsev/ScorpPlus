@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -51,5 +52,10 @@ namespace ScorpPlusBackend.Models
         /// </summary>
         [Column("iin")]
         public long? Iin { get; set; }
+
+        /// <summary>
+        /// access rights list
+        /// </summary>
+        public List<Access> Accesses { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Linq;
 using System.Threading.Tasks;
 using ScorpPlusBackend.Models;
@@ -11,56 +10,56 @@ using Microsoft.AspNetCore.Authorization;
 namespace ScorpPlusBackend.Controllers.Api.v1
 {
     /// <summary>
-    /// Room activities controller
+    /// Access activities controller
     /// </summary>
-    /// <code>api/v1/room</code>
+    /// <code>api/v1/access</code>
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class RoomController : Controller
+    public class AccessController : Controller
     {
         /// <summary>
-        /// Room context
+        /// Access context
         /// </summary>
-        private readonly RoomContext _roomContext;
+        private readonly AccessContext _accessContext;
 
         /// <summary>
-        /// Room controller constructor
+        /// Access controller constructor
         /// </summary>
-        /// <param name="roomContext">Room context</param>
-        public RoomController(RoomContext roomContext)
+        /// <param name="accessContext">Access context</param>
+        public AccessController(AccessContext accessContext)
         {
-            _roomContext = roomContext;
+            _accessContext = accessContext;
         }
 
         /// <summary>
-        /// Get all rooms route
+        /// Get all access rights route
         /// </summary>
         /// <code>GET /all</code>
-        /// <returns>Response status and list of rooms</returns>
+        /// <returns>Response status and list of access rights</returns>
         [Authorize(Roles = "admin,manager")]
         [HttpGet("all")]
-        public IActionResult GetAllRooms()
+        public IActionResult GetAllAccesses()
         {
             try
             {
                 // Get data
-                var rooms = _roomContext.Rooms
-                    .Include(x => x.Accesses)
-                    .ThenInclude(x => x.Employee)
+                var accesses = _accessContext.Accesses
+                    .Include(x => x.Employee)
+                    .Include(x => x.Room)
                     .ToList();
 
 
                 // Remove redundant data
-                rooms.ForEach(room => room.Accesses.ForEach(access =>
+                accesses.ForEach(access =>
                 {
-                    access.Room = null;
                     access.Employee.Accesses = null;
-                }));
+                    access.Room.Accesses = null;
+                });
 
                 return Json(new
                 {
                     status = true,
-                    data = rooms
+                    data = accesses
                 });
             }
             catch (Exception e)
@@ -70,42 +69,38 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Route for getting room by specified id
+        /// Route for getting access by specified id
         /// </summary>
         /// <code>GET /{id}</code>
-        /// <param name="id">Room id</param>
-        /// <returns>Response status and room object</returns>
+        /// <param name="id">Access id</param>
+        /// <returns>Response status and access object</returns>
         [Authorize(Roles = "admin,manager")]
         [HttpGet("{id}")]
-        public IActionResult GetRoom([FromRoute] int id)
+        public IActionResult GetAccess([FromRoute] int id)
         {
             try
             {
                 // Get data
-                var room = _roomContext.Rooms
-                    .Include(x => x.Accesses)
-                    .ThenInclude(x => x.Employee)
+                var access = _accessContext.Accesses
+                    .Include(x => x.Employee)
+                    .Include(x => x.Room)
                     .FirstOrDefault(x => x.Id == id);
 
-                if (room == null)
+                if (access == null)
                     return NotFound(new
                     {
                         status = false,
-                        message = "Such room doesn't exist"
+                        message = "Such access doesn't exist"
                     });
 
-
                 // Remove redundant data
-                room.Accesses.ForEach(access =>
-                {
-                    access.Room = null;
-                    access.Employee.Accesses = null;
-                });
+                access.Employee.Accesses = null;
+                access.Room.Accesses = null;
 
                 return Json(new
                 {
                     status = true,
-                    data = room
+                    data = access
                 });
             }
             catch (Exception e)
@@ -115,25 +110,20 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Adding new room route
+        /// Adding new access route
         /// </summary>
         /// <code>POST /</code>
-        /// <param name="room">Room object</param>
-        /// <returns>Response with result status and created room</returns>
+        /// <param name="access">Access object</param>
+        /// <returns>Response with result status and created access</returns>
         [Authorize(Roles = "admin,manager")]
         [HttpPost]
-        public async Task<IActionResult> PostRoom([FromBody] Room room)
+        public async Task<IActionResult> PostAccess([FromBody] Access access)
         {
             try
             {
-                // Code validation
-                if (_roomContext.Rooms.FirstOrDefault(x => x.Code == room.Code) != null)
-                    return StatusCode((int) HttpStatusCode.Conflict,
-                        new {status = false, message = "Room with given code already exists"});
-
-                await _roomContext.Rooms.AddAsync(room);
-                await _roomContext.SaveChangesAsync();
-                return Json(new {status = true, data = room});
+                await _accessContext.Accesses.AddAsync(access);
+                await _accessContext.SaveChangesAsync();
+                return Json(new {status = true, data = access});
             }
             catch (Exception e)
             {
@@ -142,22 +132,22 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Route for deleting room by specified id
+        /// Route for deleting access by specified id
         /// </summary>
         /// <code>DELETE /{id}</code>
-        /// <param name="id">Room id</param>
+        /// <param name="id">Access id</param>
         /// <returns>Status of response</returns>
         [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRoom([FromRoute] int id)
+        public async Task<IActionResult> DeleteAccess([FromRoute] int id)
         {
             try
             {
-                var room = _roomContext.Rooms.FirstOrDefault(x => x.Id == id);
-                if (room == null)
-                    return NotFound(new {status = false, message = "There is no such room in DB"});
-                _roomContext.Rooms.Remove(room);
-                await _roomContext.SaveChangesAsync();
+                var access = _accessContext.Accesses.FirstOrDefault(x => x.Id == id);
+                if (access == null)
+                    return NotFound(new {status = false, message = "There is no such access in DB"});
+                _accessContext.Accesses.Remove(access);
+                await _accessContext.SaveChangesAsync();
                 return Json(new
                 {
                     status = true

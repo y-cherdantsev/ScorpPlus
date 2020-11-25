@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 // ReSharper disable UnusedMember.Global
@@ -32,5 +33,10 @@ namespace ScorpPlusBackend.Models
         /// </summary>
         [Column("description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// access rights list
+        /// </summary>
+        public List<Access> Accesses { get; set; }
     }
 }
