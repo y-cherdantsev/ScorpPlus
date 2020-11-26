@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 // ReSharper disable ClassNeverInstantiated.Global
@@ -43,7 +44,6 @@ namespace ScorpPlusBackend.Models
         /// <summary>
         /// role_id field
         /// </summary>
-
         [ForeignKey(nameof(Role))]
         [Column("role_id")]
         public int RoleId { get; set; }
@@ -73,5 +73,10 @@ namespace ScorpPlusBackend.Models
         [Required]
         [Column("code")]
         public string Code { get; set; }
+
+        /// <summary>
+        /// users list
+        /// </summary>
+        public List<User> Users { get; set; }
     }
 }
