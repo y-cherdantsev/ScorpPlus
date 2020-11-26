@@ -27,7 +27,6 @@ namespace ScorpPlusBackend.Models
         [Column("username")]
         public string Username { get; set; }
 
-
         /// <summary>
         /// password field
         /// </summary>
