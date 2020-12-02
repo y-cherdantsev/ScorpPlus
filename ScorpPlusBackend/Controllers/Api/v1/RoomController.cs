@@ -45,17 +45,27 @@ namespace ScorpPlusBackend.Controllers.Api.v1
             {
                 // Get data
                 var rooms = _roomContext.Rooms
+                    .Include(x => x.Devices)
+                    .ThenInclude(x => x.Type)
                     .Include(x => x.Accesses)
                     .ThenInclude(x => x.Employee)
                     .ToList();
 
 
                 // Remove redundant data
-                rooms.ForEach(room => room.Accesses.ForEach(access =>
+                rooms.ForEach(room =>
                 {
-                    access.Room = null;
-                    access.Employee.Accesses = null;
-                }));
+                    room.Accesses.ForEach(access =>
+                    {
+                        access.Room = null;
+                        access.Employee.Accesses = null;
+                    });
+                    room.Devices.ForEach(access =>
+                    {
+                        access.Room = null;
+                        access.Type.Devices = null;
+                    });
+                });
 
                 return Json(new
                 {
@@ -83,6 +93,8 @@ namespace ScorpPlusBackend.Controllers.Api.v1
             {
                 // Get data
                 var room = _roomContext.Rooms
+                    .Include(x => x.Devices)
+                    .ThenInclude(x => x.Type)
                     .Include(x => x.Accesses)
                     .ThenInclude(x => x.Employee)
                     .FirstOrDefault(x => x.Id == id);
@@ -100,6 +112,11 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 {
                     access.Room = null;
                     access.Employee.Accesses = null;
+                });
+                room.Devices.ForEach(access =>
+                {
+                    access.Room = null;
+                    access.Type.Devices = null;
                 });
 
                 return Json(new

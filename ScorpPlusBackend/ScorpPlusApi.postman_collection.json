@@ -603,6 +603,221 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "DeviceController",
+					"item": [
+						{
+							"name": "GetAllDevices",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjg4NjY4OCwiZXhwIjoxNjA2OTAxMDg4LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dghVRUj3Jhyx_O0orFBHpaF5E3Ou0HesNIC0EY0vf-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/device/all",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"device",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetDevice",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5050/api/v1/device/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5050",
+									"path": [
+										"api",
+										"v1",
+										"device",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostDevice",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\":\"enter\",\r\n    \"description\":\"Entry room\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5051/api/v1/device",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"device"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteDevice",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/device/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"device",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllDeviceType",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjkwNzczNiwiZXhwIjoxNjA2OTIyMTM2LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.UIsclgTmcMeSFa5YAfX4SfpG4k7NX1qSUrqSdPVYESQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/device/type/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"device",
+										"type",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllDeviceTypes",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjg4NjY4OCwiZXhwIjoxNjA2OTAxMDg4LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dghVRUj3Jhyx_O0orFBHpaF5E3Ou0HesNIC0EY0vf-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/device/all",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"device",
+										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "AccessController",
 					"item": [
 						{

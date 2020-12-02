@@ -37,12 +37,12 @@ namespace ScorpPlusBackend.Models
         public int RoomId { get; set; }
 
         /// <summary>
-        /// Role reference
+        /// Employee reference
         /// </summary>
         public Employee Employee { get; set; }
 
         /// <summary>
-        /// Role reference
+        /// Room reference
         /// </summary>
         public Room Room { get; set; }
     }

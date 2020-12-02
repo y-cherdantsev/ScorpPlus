@@ -9,56 +9,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ScorpPlusBackend.Models
 {
     /// <summary>
-    /// User table representation
+    /// Device table representation
     /// </summary>
-    [Table("users")]
-    public sealed class User
-    {
-        /// <summary>
-        /// id field
-        /// </summary>
-        [Key]
-        [Column("id")]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// username field
-        /// </summary>
-        [Required]
-        [Column("username")]
-        public string Username { get; set; }
-
-        /// <summary>
-        /// password field
-        /// </summary>
-        [Required]
-        [Column("password")]
-        public string Password { get; set; }
-
-        /// <summary>
-        /// email field
-        /// </summary>
-        [Column("email")]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// role_id field
-        /// </summary>
-        [ForeignKey(nameof(Role))]
-        [Column("role_id")]
-        public int RoleId { get; set; }
-
-        /// <summary>
-        /// Role reference
-        /// </summary>
-        public Role Role { get; set; }
-    }
-
-    /// <summary>
-    /// Role table representation
-    /// </summary>
-    [Table("roles")]
-    public sealed class Role
+    [Table("devices")]
+    public sealed class Device
     {
         /// <summary>
         /// id field
@@ -75,8 +29,68 @@ namespace ScorpPlusBackend.Models
         public string Code { get; set; }
 
         /// <summary>
-        /// users list
+        /// type_id field
         /// </summary>
-        public List<User> Users { get; set; }
+        [Required]
+        [ForeignKey(nameof(Type))]
+        [Column("type_id")]
+        public int TypeId { get; set; }
+
+        /// <summary>
+        /// description field
+        /// </summary>
+        [Column("description")]
+        public string Description { get; set; }
+
+
+        /// <summary>
+        /// type_id field
+        /// </summary>
+        [Required]
+        [ForeignKey(nameof(Room))]
+        [Column("room_id")]
+        public int RoomId { get; set; }
+
+        /// <summary>
+        /// DeviceType reference
+        /// </summary>
+        public DeviceType Type { get; set; }
+
+        /// <summary>
+        /// Room reference
+        /// </summary>
+        public Room Room { get; set; }
+    }
+
+    /// <summary>
+    /// Device Type table representation
+    /// </summary>
+    [Table("device_types")]
+    public sealed class DeviceType
+    {
+        /// <summary>
+        /// id field
+        /// </summary>
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// code field
+        /// </summary>
+        [Required]
+        [Column("code")]
+        public string Code { get; set; }
+
+        /// <summary>
+        /// description field
+        /// </summary>
+        [Column("description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// devices list
+        /// </summary>
+        public List<Device> Devices { get; set; }
     }
 }

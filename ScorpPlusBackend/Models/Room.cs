@@ -38,5 +38,10 @@ namespace ScorpPlusBackend.Models
         /// access rights list
         /// </summary>
         public List<Access> Accesses { get; set; }
+
+        /// <summary>
+        /// devices list
+        /// </summary>
+        public List<Device> Devices { get; set; }
     }
 }
