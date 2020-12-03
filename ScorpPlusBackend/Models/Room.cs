@@ -43,5 +43,10 @@ namespace ScorpPlusBackend.Models
         /// devices list
         /// </summary>
         public List<Device> Devices { get; set; }
+
+        /// <summary>
+        /// climate list
+        /// </summary>
+        public List<Climate> ClimateList { get; set; }
     }
 }

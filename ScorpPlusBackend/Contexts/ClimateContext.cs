@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore;
 namespace ScorpPlusBackend.Contexts
 {
     /// <summary>
-    /// Employee context for proceeding activities with employees
+    /// Climate context for proceeding activities with climate information
     /// </summary>
-    public sealed class AccessContext : DbContext
+    public class ClimateContext : DbContext
     {
         /// <summary>
-        /// DbSet for Access model
+        /// DbSet for Climate model
         /// </summary>
-        public DbSet<Access> Accesses { get; set; }
+        public DbSet<Climate> ClimateList { get; set; }
 
         /// <inheritdoc />
-        public AccessContext(DbContextOptions<AccessContext> options)
+        public ClimateContext(DbContextOptions<ClimateContext> options)
             : base(options)
         {
         }

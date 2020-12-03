@@ -60,6 +60,11 @@ namespace ScorpPlusBackend.Models
         /// Room reference
         /// </summary>
         public Room Room { get; set; }
+
+        /// <summary>
+        /// climate list
+        /// </summary>
+        public List<Climate> ClimateList { get; set; }
     }
 
     /// <summary>
