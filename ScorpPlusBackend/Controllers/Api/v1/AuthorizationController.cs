@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Linq;
+using System.Text;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ScorpPlusBackend.Models;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ScorpPlusBackend.Services;
 using ScorpPlusBackend.Contexts;
+using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -68,12 +70,13 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 var guestRole = _userContext.Roles.FirstOrDefault(x => x.Code == "guest");
                 user.Role = guestRole;
                 user.RoleId = guestRole!.Id;
-                // ReSharper disable once PossibleNullReferenceException
+                user.Password = EncryptPassword(user.Password);
 
                 await _userContext.Users.AddAsync(user);
                 await _userContext.SaveChangesAsync();
                 user.Role!.Users = null;
-                _notificationService.Notify("admin", $"New user '{user.Username}' with '{user.Id}' id has been created;",
+                _notificationService.Notify("admin",
+                    $"New user '{user.Username}' with '{user.Id}' id has been created;",
                     "New user ➕");
                 return Json(new {status = true, data = user});
             }
@@ -93,6 +96,8 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         [HttpPost("login")]
         public IActionResult PostLogin(string username, string password)
         {
+            password = EncryptPassword(password);
+
             var user = _userContext.Users.Include(x => x.Role)
                 .FirstOrDefault(x => x.Username == username && x.Password == password);
             if (user == null)
@@ -142,6 +147,19 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         public IActionResult PostLogout()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// SHA512 password encryption 
+        /// </summary>
+        /// <param name="password">Password that should be hashed</param>
+        /// <returns>Hash value of the password</returns>
+        private static string EncryptPassword(string password)
+        {
+            var sha512 = new SHA512Managed();
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var hash = sha512.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
         }
     }
 }
