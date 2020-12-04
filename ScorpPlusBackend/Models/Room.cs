@@ -47,6 +47,6 @@ namespace ScorpPlusBackend.Models
         /// <summary>
         /// climate list
         /// </summary>
-        public List<Climate> ClimateList { get; set; }
+        public List<ClimateHistory> ClimateHistories { get; set; }
     }
 }

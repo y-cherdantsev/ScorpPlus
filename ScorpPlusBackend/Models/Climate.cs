@@ -7,8 +7,8 @@ namespace ScorpPlusBackend.Models
     /// <summary>
     /// Climate table representation
     /// </summary>
-    [Table("climate")]
-    public class Climate
+    [Table("climate_history")]
+    public class ClimateHistory
     {
         /// <summary>
         /// id field

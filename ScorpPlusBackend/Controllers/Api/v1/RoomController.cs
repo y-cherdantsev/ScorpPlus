@@ -49,7 +49,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                     .ThenInclude(x => x.Type)
                     .Include(x => x.Accesses)
                     .ThenInclude(x => x.Employee)
-                    .Include(x => x.ClimateList)
+                    .Include(x => x.ClimateHistories)
                     .ToList();
 
 
@@ -66,7 +66,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                         access.Room = null;
                         access.Type.Devices = null;
                     });
-                    room.ClimateList.ForEach(climate =>
+                    room.ClimateHistories.ForEach(climate =>
                     {
                         climate.Room = null;
                         climate.Device = null;
@@ -103,7 +103,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                     .ThenInclude(x => x.Type)
                     .Include(x => x.Accesses)
                     .ThenInclude(x => x.Employee)
-                    .Include(x => x.ClimateList)
+                    .Include(x => x.ClimateHistories)
                     .FirstOrDefault(x => x.Id == id);
 
                 if (room == null)
@@ -125,7 +125,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                     access.Room = null;
                     access.Type.Devices = null;
                 });
-                room.ClimateList.ForEach(climate =>
+                room.ClimateHistories.ForEach(climate =>
                 {
                     climate.Room = null;
                     climate.Device = null;

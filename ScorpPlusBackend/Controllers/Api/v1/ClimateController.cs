@@ -32,36 +32,36 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Get all climate route
+        /// Get all climate histories route
         /// </summary>
-        /// <code>GET /all</code>
-        /// <returns>Response status and list of climate</returns>
+        /// <code>GET /climateHistory/all</code>
+        /// <returns>Response status and list of climate histories</returns>
         [Authorize(Roles = "admin,manager")]
-        [HttpGet("all")]
-        public IActionResult GetAllClimate()
+        [HttpGet("climateHistory/all")]
+        public IActionResult GetAllClimateHistories()
         {
             try
             {
                 // Get data
-                var climateList = _climateContext.ClimateList
+                var climateHistories = _climateContext.ClimateHistories
                     .Include(x => x.Device)
                     .Include(x => x.Room)
                     .ToList();
 
 
                 // Remove redundant data
-                climateList.ForEach(climate =>
+                climateHistories.ForEach(climateHistory =>
                 {
-                    climate.Room.ClimateList = null;
-                    climate.Device.ClimateList = null;
-                    climate.Room.Devices = null;
-                    climate.Device.Room.Devices = null;
+                    climateHistory.Room.ClimateHistories = null;
+                    climateHistory.Device.ClimateHistories = null;
+                    climateHistory.Room.Devices = null;
+                    climateHistory.Device.Room.Devices = null;
                 });
 
                 return Json(new
                 {
                     status = true,
-                    data = climateList
+                    data = climateHistories
                 });
             }
             catch (Exception e)
@@ -71,41 +71,41 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Route for getting climate by specified id
+        /// Route for getting climate history by specified id
         /// </summary>
-        /// <code>GET /{id}</code>
-        /// <param name="id">Climate id</param>
-        /// <returns>Response status and climate object</returns>
+        /// <code>GET /climateHistory/{id}</code>
+        /// <param name="id">Climate history id</param>
+        /// <returns>Response status and climate history object</returns>
         [Authorize(Roles = "admin,manager")]
-        [HttpGet("{id}")]
-        public IActionResult GetClimate([FromRoute] int id)
+        [HttpGet("climateHistory/{id}")]
+        public IActionResult GetClimateHistory([FromRoute] int id)
         {
             try
             {
                 // Get data
-                var climate = _climateContext.ClimateList
+                var climateHistory = _climateContext.ClimateHistories
                     .Include(x => x.Device)
                     .Include(x => x.Room)
                     .FirstOrDefault(x => x.Id == id);
 
-                if (climate == null)
+                if (climateHistory == null)
                     return NotFound(new
                     {
                         status = false,
-                        message = "Such climate doesn't exist"
+                        message = "Such climate history doesn't exist"
                     });
 
 
                 // Remove redundant data
-                climate.Room.ClimateList = null;
-                climate.Device.ClimateList = null;
-                climate.Room.Devices = null;
-                climate.Device.Room.Devices = null;
+                climateHistory.Room.ClimateHistories = null;
+                climateHistory.Device.ClimateHistories = null;
+                climateHistory.Room.Devices = null;
+                climateHistory.Device.Room.Devices = null;
 
                 return Json(new
                 {
                     status = true,
-                    data = climate
+                    data = climateHistory
                 });
             }
             catch (Exception e)
@@ -115,21 +115,21 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Adding new climate route
+        /// Adding new climate history route
         /// </summary>
-        /// <code>POST /</code>
-        /// <param name="climate">Climate object</param>
+        /// <code>POST /climateHistory/</code>
+        /// <param name="climateHistory">ClimateHistory object</param>
         /// <returns>Response with result status and created climate</returns>
         /// \todo(Check existence of device)
         [Authorize(Roles = "admin,manager")]
-        [HttpPost]
-        public async Task<IActionResult> PostClimate([FromBody] Climate climate)
+        [HttpPost("climateHistory")]
+        public async Task<IActionResult> PostClimateHistory([FromBody] ClimateHistory climateHistory)
         {
             try
             {
-                await _climateContext.ClimateList.AddAsync(climate);
+                await _climateContext.ClimateHistories.AddAsync(climateHistory);
                 await _climateContext.SaveChangesAsync();
-                return Json(new {status = true, data = climate});
+                return Json(new {status = true, data = climateHistory});
             }
             catch (Exception e)
             {
@@ -138,21 +138,21 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// Route for deleting climate by specified id
+        /// Route for deleting climate history by specified id
         /// </summary>
-        /// <code>DELETE /{id}</code>
-        /// <param name="id">Climate id</param>
+        /// <code>DELETE /climateHistory/{id}</code>
+        /// <param name="id">Climate history id</param>
         /// <returns>Status of response</returns>
         [Authorize(Roles = "admin")]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClimate([FromRoute] int id)
+        [HttpDelete("climateHistory/{id}")]
+        public async Task<IActionResult> DeleteClimateHistory([FromRoute] int id)
         {
             try
             {
-                var climate = _climateContext.ClimateList.FirstOrDefault(x => x.Id == id);
-                if (climate == null)
-                    return NotFound(new {status = false, message = "There is no such climate in DB"});
-                _climateContext.ClimateList.Remove(climate);
+                var climateHistory = _climateContext.ClimateHistories.FirstOrDefault(x => x.Id == id);
+                if (climateHistory == null)
+                    return NotFound(new {status = false, message = "There is no such climate history in DB"});
+                _climateContext.ClimateHistories.Remove(climateHistory);
                 await _climateContext.SaveChangesAsync();
                 return Json(new
                 {

@@ -13,7 +13,7 @@ namespace ScorpPlusBackend.Contexts
         /// <summary>
         /// DbSet for Climate model
         /// </summary>
-        public DbSet<Climate> ClimateList { get; set; }
+        public DbSet<ClimateHistory> ClimateHistories { get; set; }
 
         /// <inheritdoc />
         public ClimateContext(DbContextOptions<ClimateContext> options)
