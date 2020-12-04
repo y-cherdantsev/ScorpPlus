@@ -156,9 +156,9 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// <returns>Hash value of the password</returns>
         private static string EncryptPassword(string password)
         {
-            var sha512 = new SHA512Managed();
+            var sha256 = new SHA256Managed();
             var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = sha512.ComputeHash(bytes);
+            var hash = sha256.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
         }
     }
