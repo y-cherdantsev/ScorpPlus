@@ -52,6 +52,11 @@ namespace ScorpPlusBackend.Models
         /// Role reference
         /// </summary>
         public Role Role { get; set; }
+
+        /// <summary>
+        /// TelegramChat reference
+        /// </summary>
+        public TelegramChat TelegramChat { get; set; }
     }
 
     /// <summary>

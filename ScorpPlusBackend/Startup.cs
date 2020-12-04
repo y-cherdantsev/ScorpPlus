@@ -1,3 +1,4 @@
+using ScorpPlusBackend.Services;
 using ScorpPlusBackend.Contexts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
@@ -50,6 +51,8 @@ namespace ScorpPlusBackend
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
             services.AddDbContext<ClimateContext>(opt =>
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<NotificationContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
 
             // Configuring JWT service
             var jwtConfiguration = Configuration.GetSection("Jwt");
@@ -60,6 +63,15 @@ namespace ScorpPlusBackend
                 Key = jwtConfiguration["Key"],
                 Lifetime = int.Parse(jwtConfiguration["Lifetime"])
             };
+
+            // Configuring notification service
+            var telegramConfiguration = Configuration.GetSection("TelegramBot");
+            Options.TelegramBot = new Options.Telegram
+            {
+                Token = telegramConfiguration["Token"]
+            };
+
+            services.AddScoped<NotificationService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -76,6 +88,7 @@ namespace ScorpPlusBackend
                         ValidateIssuerSigningKey = true,
                     };
                 });
+
 
             services.AddControllers();
         }

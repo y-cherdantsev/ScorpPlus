@@ -16,6 +16,11 @@ namespace ScorpPlusBackend
         /// <summary>
         /// Jwt service options
         /// </summary>
+        public static Telegram TelegramBot { get; set; }
+
+        /// <summary>
+        /// Jwt service options
+        /// </summary>
         public class Jwt
         {
             /// <summary>
@@ -42,6 +47,17 @@ namespace ScorpPlusBackend
             /// Key encryption module
             /// </summary>
             public SymmetricSecurityKey SymmetricSecurityKey => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
+        }
+
+        /// <summary>
+        /// TelegramBot service options
+        /// </summary>
+        public class Telegram
+        {
+            /// <summary>
+            /// Bot token
+            /// </summary>
+            public string Token { get; set; }
         }
     }
 }

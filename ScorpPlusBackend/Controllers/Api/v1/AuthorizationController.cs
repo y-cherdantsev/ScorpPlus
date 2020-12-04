@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ScorpPlusBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using ScorpPlusBackend.Services;
 using ScorpPlusBackend.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,12 +28,19 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         private readonly UserContext _userContext;
 
         /// <summary>
+        /// Notification service
+        /// </summary>
+        private readonly NotificationService _notificationService;
+
+        /// <summary>
         /// Authorization controller constructor
         /// </summary>
         /// <param name="userContext">User context</param>
-        public AuthorizationController(UserContext userContext)
+        /// <param name="notificationService">Notification service</param>
+        public AuthorizationController(UserContext userContext, NotificationService notificationService)
         {
             _userContext = userContext;
+            _notificationService = notificationService;
         }
 
         /// <summary>
@@ -60,9 +68,13 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 var guestRole = _userContext.Roles.FirstOrDefault(x => x.Code == "guest");
                 user.Role = guestRole;
                 user.RoleId = guestRole!.Id;
-                
+                // ReSharper disable once PossibleNullReferenceException
+
                 await _userContext.Users.AddAsync(user);
                 await _userContext.SaveChangesAsync();
+                user.Role!.Users = null;
+                _notificationService.Notify("admin", $"New user '{user.Username}' with '{user.Id}' id has been created;",
+                    "New user ➕");
                 return Json(new {status = true, data = user});
             }
             catch (Exception e)
@@ -115,6 +127,8 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 }
             };
 
+            _notificationService.Notify("admin", $"User '{user.Username}' with '{user.Id}' id entered the system;",
+                "Authorization 🔐");
             return Json(response);
         }
 
