@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ScorpPlusBackend.Services;
 using ScorpPlusBackend.Contexts;
-using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Konscious.Security.Cryptography;
 
 namespace ScorpPlusBackend.Controllers.Api.v1
 {
@@ -60,8 +60,8 @@ namespace ScorpPlusBackend.Controllers.Api.v1
             {
                 if (user.Username == null) return BadRequest(new {status = false, message = "Username field is empty"});
                 if (user.Password == null) return BadRequest(new {status = false, message = "Password field is empty"});
-                if (user.Username.Length < 6) return BadRequest(new {status = false, message = "Username too short"});
-                if (user.Password.Length < 6) return BadRequest(new {status = false, message = "Password too short"});
+                // if (user.Username.Length < 6) return BadRequest(new {status = false, message = "Username too short"});
+                // if (user.Password.Length < 6) return BadRequest(new {status = false, message = "Password too short"});
 
                 if (_userContext.Users.FirstOrDefault(x => x.Username == user.Username) != null)
                     return StatusCode((int) HttpStatusCode.Conflict,
@@ -75,6 +75,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 await _userContext.Users.AddAsync(user);
                 await _userContext.SaveChangesAsync();
                 user.Role!.Users = null;
+                user.Password = null;
                 _notificationService.Notify("admin",
                     $"New user '{user.Username}' with '{user.Id}' id has been created;",
                     "New user ➕");
@@ -150,15 +151,20 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         }
 
         /// <summary>
-        /// SHA512 password encryption 
+        /// Argon2i password encryption 
         /// </summary>
         /// <param name="password">Password that should be hashed</param>
         /// <returns>Hash value of the password</returns>
         private static string EncryptPassword(string password)
         {
-            var sha256 = new SHA256Managed();
             var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = sha256.ComputeHash(bytes);
+            var argon2I = new Argon2i(bytes)
+            {
+                Iterations = 64,
+                MemorySize = 4096,
+                DegreeOfParallelism = 16
+            };
+            var hash = argon2I.GetBytes(256);
             return Convert.ToBase64String(hash);
         }
     }
