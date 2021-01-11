@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
+using ScorpPlusBackend.Services.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -36,8 +37,22 @@ namespace ScorpPlusBackend
         public void ConfigureServices(IServiceCollection services)
         {
             // Adding DB contexts
+            var dbConnectionString = Configuration.GetConnectionString("ScorpPlusDb");
+
             services.AddDbContext<UserContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("ScorpPlusDb")), ServiceLifetime.Transient);
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<EmployeeContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<RoomContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<AccessContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<DeviceContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<ClimateContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<NotificationContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
 
             // Configuring JWT service
             var jwtConfiguration = Configuration.GetSection("Jwt");
@@ -48,6 +63,26 @@ namespace ScorpPlusBackend
                 Key = jwtConfiguration["Key"],
                 Lifetime = int.Parse(jwtConfiguration["Lifetime"])
             };
+
+            // Configuring notification service
+            var telegramConfiguration = Configuration.GetSection("TelegramBot");
+            Options.TelegramBot = new Options.TelegramBotDto
+            {
+                Token = telegramConfiguration["Token"]
+            };
+
+            var mailingConfiguration = Configuration.GetSection("MailingServer");
+            Options.MailingServer = new Options.MailingServerDto
+            {
+                Host = mailingConfiguration["Host"],
+                Port = int.Parse(mailingConfiguration["Port"]),
+                Username = mailingConfiguration["Username"],
+                Password = mailingConfiguration["Password"],
+                MailName = mailingConfiguration["MailName"],
+                MailAddress = mailingConfiguration["MailAddress"]
+            };
+
+            services.AddScoped<NotificationService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -65,6 +100,7 @@ namespace ScorpPlusBackend
                     };
                 });
 
+
             services.AddControllers();
         }
 
@@ -79,6 +115,12 @@ namespace ScorpPlusBackend
                 app.UseDeveloperExceptionPage();
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+                builder.WithOrigins()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();

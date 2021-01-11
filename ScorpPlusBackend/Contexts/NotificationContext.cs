@@ -6,22 +6,22 @@ using Microsoft.EntityFrameworkCore;
 namespace ScorpPlusBackend.Contexts
 {
     /// <summary>
-    /// User context for proceeding activities with users
+    /// Notification context for proceeding activities with notifications
     /// </summary>
-    public sealed class UserContext : DbContext
+    public class NotificationContext : DbContext
     {
         /// <summary>
         /// DbSet for User model
         /// </summary>
         public DbSet<User> Users { get; set; }
-
+        
         /// <summary>
-        /// DbSet for Role model
+        /// DbSet for TelegramChat model
         /// </summary>
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<TelegramChat> TelegramChats { get; set; }
 
         /// <inheritdoc />
-        public UserContext(DbContextOptions<UserContext> options)
+        public NotificationContext(DbContextOptions<NotificationContext> options)
             : base(options)
         {
         }
@@ -29,7 +29,8 @@ namespace ScorpPlusBackend.Contexts
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Role>().HasIndex(x => x.Code).IsUnique();
+            modelBuilder.Entity<TelegramChat>().HasIndex(x => x.UserId).IsUnique();
+            modelBuilder.Entity<TelegramChat>().HasIndex(x => x.ChatId).IsUnique();
 
             modelBuilder.Entity<User>().HasIndex(x => x.Username).IsUnique();
             modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
