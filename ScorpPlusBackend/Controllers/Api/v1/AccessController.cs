@@ -158,5 +158,126 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 return BadRequest(new {status = false, message = e.Message});
             }
         }
+
+        /// <summary>
+        /// Get all access histories route
+        /// </summary>
+        /// <code>GET /history/all</code>
+        /// <returns>Response status and list of access histories</returns>
+        [Authorize(Roles = "admin,manager")]
+        [HttpGet("history/all")]
+        public IActionResult GetAllAccessHistories(
+            [FromQuery] int? deviceId,
+            [FromQuery] int? roomId,
+            [FromQuery] int? employeeId)
+        {
+            try
+            {
+                // Get data
+                var accessHistories = _accessContext.AccessHistories
+                    .Include(x => x.Room)
+                    .Include(x => x.Device)
+                    .Include(x => x.Employee)
+                    .Where(x => roomId == null || x.RoomId == roomId)
+                    .Where(x => deviceId == null || x.DeviceId == deviceId)
+                    .Where(x => employeeId == null || x.EmployeeId == employeeId)
+                    .ToList();
+
+
+                // Remove redundant data
+                accessHistories.ForEach(accessHistory =>
+                {
+                    accessHistory.Device.Room.AccessHistories = null;
+                    accessHistory.Room.AccessHistories = null;
+                    accessHistory.Device.Room.Devices = null;
+                    accessHistory.Room.Devices = null;
+                    accessHistory.Employee.AccessHistories = null;
+                });
+
+                return Json(new
+                {
+                    status = true,
+                    data = accessHistories
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {status = false, message = e.Message});
+            }
+        }
+
+        /// <summary>
+        /// Route for getting access history by specified id
+        /// </summary>
+        /// <code>GET /history/{id}</code>
+        /// <param name="id">Access history id</param>
+        /// <returns>Response status and access history object</returns>
+        [Authorize(Roles = "admin,manager")]
+        [HttpGet("history/{id}")]
+        public IActionResult GetAccessHistory([FromRoute] int id)
+        {
+            try
+            {
+                // Get data
+                var accessHistory = _accessContext.AccessHistories
+                    .Include(x => x.Room)
+                    .Include(x => x.Device)
+                    .Include(x => x.Employee)
+                    .FirstOrDefault(x => x.Id == id);
+
+
+                if (accessHistory == null)
+                    return NotFound(new
+                    {
+                        status = false,
+                        message = "Such access history doesn't exist"
+                    });
+
+                // Remove redundant data
+                accessHistory.Device.Room.AccessHistories = null;
+                accessHistory.Room.AccessHistories = null;
+                accessHistory.Device.Room.Devices = null;
+                accessHistory.Room.Devices = null;
+                accessHistory.Employee.AccessHistories = null;
+
+                return Json(new
+                {
+                    status = true,
+                    data = accessHistory
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {status = false, message = e.Message});
+            }
+        }
+
+        /// <summary>
+        /// Route for deleting access by specified id
+        /// </summary>
+        /// <code>DELETE /history/{id}</code>
+        /// <param name="id">Access history id</param>
+        /// <returns>Status of response</returns>
+        [Authorize(Roles = "admin")]
+        [HttpDelete("history/{id}")]
+        public async Task<IActionResult> DeleteAccessHistory([FromRoute] int id)
+        {
+            try
+            {
+                var accessHistory = _accessContext.AccessHistories.FirstOrDefault(x => x.Id == id);
+                if (accessHistory == null)
+                    return NotFound(new {status = false, message = "There is no such access history in DB"});
+                _accessContext.AccessHistories.Remove(accessHistory);
+                await _accessContext.SaveChangesAsync();
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {status = false, message = e.Message});
+            }
+        }
     }
 }

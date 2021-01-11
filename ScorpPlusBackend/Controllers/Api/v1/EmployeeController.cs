@@ -47,6 +47,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 var employees = _employeeContext.Employees
                     .Include(x => x.Accesses)
                     .ThenInclude(x => x.Room)
+                    .Include(x => x.AccessHistories)
                     .ToList();
 
                 // Remove redundant data
@@ -54,6 +55,13 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 {
                     access.Employee = null;
                     access.Room.Accesses = null;
+                    access.Room.AccessHistories = null;
+                }));
+                employees.ForEach(employee => employee.AccessHistories.ForEach(accessHistory =>
+                {
+                    accessHistory.Employee = null;
+                    accessHistory.Room.Accesses = null;
+                    accessHistory.Room.AccessHistories = null;
                 }));
 
                 return Json(new
@@ -84,6 +92,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 var employee = _employeeContext.Employees
                     .Include(x => x.Accesses)
                     .ThenInclude(x => x.Room)
+                    .Include(x => x.AccessHistories)
                     .FirstOrDefault(x => x.Id == id);
 
                 if (employee == null)
@@ -98,6 +107,12 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 {
                     access.Employee = null;
                     access.Room.Accesses = null;
+                });
+                employee.AccessHistories.ForEach(accessHistory =>
+                {
+                    accessHistory.Employee = null;
+                    accessHistory.Room.AccessHistories = null;
+                    accessHistory.Room.Accesses = null;
                 });
 
                 return Json(new

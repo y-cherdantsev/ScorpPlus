@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using ScorpPlusBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using ScorpPlusBackend.Services;
 using ScorpPlusBackend.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Konscious.Security.Cryptography;
+using ScorpPlusBackend.Services.Notifications;
 
 namespace ScorpPlusBackend.Controllers.Api.v1
 {
@@ -77,8 +77,7 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 user.Role!.Users = null;
                 user.Password = null;
                 _notificationService.Notify("admin",
-                    $"New user '{user.Username}' with '{user.Id}' id has been created;",
-                    "New user ➕");
+                    $"New user '{user.Username}' with '{user.Id}' id has been created", NotificationType.UserCreated);
                 return Json(new {status = true, data = user});
             }
             catch (Exception e)
@@ -133,8 +132,8 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 }
             };
 
-            _notificationService.Notify("admin", $"User '{user.Username}' with '{user.Id}' id entered the system;",
-                "Authorization 🔐");
+            _notificationService.Notify("admin", $"User '{user.Username}' with '{user.Id}' id entered the system",
+                NotificationType.UserAuthorized);
             return Json(response);
         }
 

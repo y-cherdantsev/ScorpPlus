@@ -606,14 +606,14 @@
 					"name": "ClimateController",
 					"item": [
 						{
-							"name": "GetAllClimate",
+							"name": "GetAllClimateHistories",
 							"request": {
 								"auth": {
 									"type": "bearer",
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjk5NDM5NSwiZXhwIjoxNjA3MDA4Nzk1LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.wwF40isxvqvwakj-BVf0055eDqMAD8AZtj2JnZoqnyg",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNzA3NzMwOSwiZXhwIjoxNjA3MDkxNzA5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.gdKAhwMuS56azU09FoMGbGN0GQrzDSUpmWdwHXW_q04",
 											"type": "string"
 										}
 									]
@@ -621,7 +621,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:5051/api/v1/climate/all",
+									"raw": "https://localhost:5051/api/v1/climate/history/all",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -631,6 +631,7 @@
 										"api",
 										"v1",
 										"climate",
+										"history",
 										"all"
 									]
 								}
@@ -638,7 +639,7 @@
 							"response": []
 						},
 						{
-							"name": "GetClimate",
+							"name": "GetClimateHistory",
 							"protocolProfileBehavior": {
 								"disabledSystemHeaders": {},
 								"strictSSL": false
@@ -649,7 +650,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNzA3NzMwOSwiZXhwIjoxNjA3MDkxNzA5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.gdKAhwMuS56azU09FoMGbGN0GQrzDSUpmWdwHXW_q04",
 											"type": "string"
 										}
 									]
@@ -657,31 +658,32 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5050/api/v1/climate/2",
-									"protocol": "http",
+									"raw": "https://localhost:5051/api/v1/climate/history/10",
+									"protocol": "https",
 									"host": [
 										"localhost"
 									],
-									"port": "5050",
+									"port": "5051",
 									"path": [
 										"api",
 										"v1",
 										"climate",
-										"2"
+										"history",
+										"10"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "PostClimate",
+							"name": "PostClimateHistory",
 							"request": {
 								"auth": {
 									"type": "bearer",
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjk5NDM5NSwiZXhwIjoxNjA3MDA4Nzk1LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.wwF40isxvqvwakj-BVf0055eDqMAD8AZtj2JnZoqnyg",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNzA3NzMwOSwiZXhwIjoxNjA3MDkxNzA5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.gdKAhwMuS56azU09FoMGbGN0GQrzDSUpmWdwHXW_q04",
 											"type": "string"
 										}
 									]
@@ -698,41 +700,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:5051/api/v1/climate",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "5051",
-									"path": [
-										"api",
-										"v1",
-										"climate"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DeleteClimate",
-							"protocolProfileBehavior": {
-								"strictSSL": false
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjk5NDM5NSwiZXhwIjoxNjA3MDA4Nzk1LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.wwF40isxvqvwakj-BVf0055eDqMAD8AZtj2JnZoqnyg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:5051/api/v1/climate/10",
+									"raw": "https://localhost:5051/api/v1/climate/history",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -742,7 +710,43 @@
 										"api",
 										"v1",
 										"climate",
-										"10"
+										"history"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteClimateHistory",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNzA3NzMwOSwiZXhwIjoxNjA3MDkxNzA5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.gdKAhwMuS56azU09FoMGbGN0GQrzDSUpmWdwHXW_q04",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/climate/history/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"climate",
+										"history",
+										"1"
 									]
 								}
 							},
@@ -921,7 +925,7 @@
 							"response": []
 						},
 						{
-							"name": "GetAllDeviceType",
+							"name": "GetDeviceType",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -1129,6 +1133,128 @@
 										"v1",
 										"access",
 										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllAccessHistories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNzQwNjY4OSwiZXhwIjoxNjA3NDIxMDg5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dKNAliIFs_ZTd3ZzJ4SEZ64xieOMirs1JBnObBVTlQI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access/history/all",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access",
+										"history",
+										"all"
+									],
+									"query": [
+										{
+											"key": "roomId",
+											"value": "4",
+											"disabled": true
+										},
+										{
+											"key": "deviceId",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "employeeId",
+											"value": "3",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAccessHistory",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNjMwNDY1MiwiZXhwIjoxNjA2MzE5MDUyLCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dUAqNlsa9w14aY97B8k_Vm9IMANwQ0UPVvEK1yCyP-c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access/history/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access",
+										"history",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAccessHistory",
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlcm5hbWUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTYwNzQwNjY4OSwiZXhwIjoxNjA3NDIxMDg5LCJpc3MiOiJTY29ycFBsdXNCYWNrZW5kIiwiYXVkIjoiU2NvcnBQbHVzIn0.dKNAliIFs_ZTd3ZzJ4SEZ64xieOMirs1JBnObBVTlQI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5051/api/v1/access/history/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5051",
+									"path": [
+										"api",
+										"v1",
+										"access",
+										"history",
+										"1"
 									]
 								}
 							},

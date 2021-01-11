@@ -15,6 +15,11 @@ namespace ScorpPlusBackend.Contexts
         /// </summary>
         public DbSet<Access> Accesses { get; set; }
 
+        /// <summary>
+        /// DbSet for Access model
+        /// </summary>
+        public DbSet<AccessHistory> AccessHistories { get; set; }
+
         /// <inheritdoc />
         public AccessContext(DbContextOptions<AccessContext> options)
             : base(options)

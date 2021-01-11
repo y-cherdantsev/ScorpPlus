@@ -57,5 +57,10 @@ namespace ScorpPlusBackend.Models
         /// access rights list
         /// </summary>
         public List<Access> Accesses { get; set; }
+
+        /// <summary>
+        /// access histories list
+        /// </summary>
+        public List<AccessHistory> AccessHistories { get; set; }
     }
 }

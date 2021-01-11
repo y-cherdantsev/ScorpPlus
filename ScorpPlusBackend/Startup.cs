@@ -1,4 +1,3 @@
-using ScorpPlusBackend.Services;
 using ScorpPlusBackend.Contexts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
+using ScorpPlusBackend.Services.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -66,9 +66,20 @@ namespace ScorpPlusBackend
 
             // Configuring notification service
             var telegramConfiguration = Configuration.GetSection("TelegramBot");
-            Options.TelegramBot = new Options.Telegram
+            Options.TelegramBot = new Options.TelegramBotDto
             {
                 Token = telegramConfiguration["Token"]
+            };
+
+            var mailingConfiguration = Configuration.GetSection("MailingServer");
+            Options.MailingServer = new Options.MailingServerDto
+            {
+                Host = mailingConfiguration["Host"],
+                Port = int.Parse(mailingConfiguration["Port"]),
+                Username = mailingConfiguration["Username"],
+                Password = mailingConfiguration["Password"],
+                MailName = mailingConfiguration["MailName"],
+                MailAddress = mailingConfiguration["MailAddress"]
             };
 
             services.AddScoped<NotificationService>();
@@ -104,6 +115,12 @@ namespace ScorpPlusBackend
                 app.UseDeveloperExceptionPage();
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+                builder.WithOrigins()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();

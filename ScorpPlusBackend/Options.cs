@@ -14,9 +14,14 @@ namespace ScorpPlusBackend
         public static Jwt JwtOptions { get; set; }
 
         /// <summary>
-        /// Jwt service options
+        /// Telegram notificator bot options
         /// </summary>
-        public static Telegram TelegramBot { get; set; }
+        public static TelegramBotDto TelegramBot { get; set; }
+
+        /// <summary>
+        /// Email notificator options
+        /// </summary>
+        public static MailingServerDto MailingServer { get; set; }
 
         /// <summary>
         /// Jwt service options
@@ -52,12 +57,48 @@ namespace ScorpPlusBackend
         /// <summary>
         /// TelegramBot service options
         /// </summary>
-        public class Telegram
+        public class TelegramBotDto
         {
             /// <summary>
             /// Bot token
             /// </summary>
             public string Token { get; set; }
+        }
+
+        /// <summary>
+        /// Email service options
+        /// </summary>
+        public class MailingServerDto
+        {
+            /// <summary>
+            /// Host
+            /// </summary>
+            public string Host { get; set; }
+
+            /// <summary>
+            /// Port
+            /// </summary>
+            public int Port { get; set; }
+
+            /// <summary>
+            /// Username
+            /// </summary>
+            public string Username { get; set; }
+
+            /// <summary>
+            /// Password
+            /// </summary>
+            public string Password { get; set; }
+
+            /// <summary>
+            /// MailName
+            /// </summary>
+            public string MailName { get; set; }
+
+            /// <summary>
+            /// MailAddress
+            /// </summary>
+            public string MailAddress { get; set; }
         }
     }
 }

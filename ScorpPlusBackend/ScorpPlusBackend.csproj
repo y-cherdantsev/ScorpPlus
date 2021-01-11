@@ -7,7 +7,9 @@
     <ItemGroup>
       <PackageReference Include="FlexLabs.EntityFrameworkCore.Upsert" Version="3.1.0" />
       <PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.2.1" />
+      <PackageReference Include="MailKit" Version="2.10.1" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+      <PackageReference Include="MimeKit" Version="2.10.1" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
       <PackageReference Include="Telegram.Bot" Version="15.7.1" />
     </ItemGroup>

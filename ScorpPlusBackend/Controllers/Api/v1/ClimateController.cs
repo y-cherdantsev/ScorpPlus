@@ -34,10 +34,10 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// <summary>
         /// Get all climate histories route
         /// </summary>
-        /// <code>GET /climateHistory/all</code>
+        /// <code>GET /history/all</code>
         /// <returns>Response status and list of climate histories</returns>
         [Authorize(Roles = "admin,manager")]
-        [HttpGet("climateHistory/all")]
+        [HttpGet("history/all")]
         public IActionResult GetAllClimateHistories()
         {
             try
@@ -73,11 +73,11 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// <summary>
         /// Route for getting climate history by specified id
         /// </summary>
-        /// <code>GET /climateHistory/{id}</code>
+        /// <code>GET /history/{id}</code>
         /// <param name="id">Climate history id</param>
         /// <returns>Response status and climate history object</returns>
         [Authorize(Roles = "admin,manager")]
-        [HttpGet("climateHistory/{id}")]
+        [HttpGet("history/{id}")]
         public IActionResult GetClimateHistory([FromRoute] int id)
         {
             try
@@ -117,12 +117,12 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// <summary>
         /// Adding new climate history route
         /// </summary>
-        /// <code>POST /climateHistory/</code>
+        /// <code>POST /history/</code>
         /// <param name="climateHistory">ClimateHistory object</param>
         /// <returns>Response with result status and created climate</returns>
         /// \todo(Check existence of device)
         [Authorize(Roles = "admin,manager")]
-        [HttpPost("climateHistory")]
+        [HttpPost("history")]
         public async Task<IActionResult> PostClimateHistory([FromBody] ClimateHistory climateHistory)
         {
             try
@@ -140,11 +140,11 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// <summary>
         /// Route for deleting climate history by specified id
         /// </summary>
-        /// <code>DELETE /climateHistory/{id}</code>
+        /// <code>DELETE /history/{id}</code>
         /// <param name="id">Climate history id</param>
         /// <returns>Status of response</returns>
         [Authorize(Roles = "admin")]
-        [HttpDelete("climateHistory/{id}")]
+        [HttpDelete("history/{id}")]
         public async Task<IActionResult> DeleteClimateHistory([FromRoute] int id)
         {
             try
