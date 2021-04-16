@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScorpPlusBackend", "ScorpPlusBackend\ScorpPlusBackend.csproj", "{6259BC18-57E1-45B4-9963-04CE601F59EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScorpPlusAdminDashboard", "ScorpPlusAdminDashboard\ScorpPlusAdminDashboard.csproj", "{2B5846CC-4E29-425F-9072-A31DED225D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScorpPlus", "ScorpPlus\ScorpPlus.csproj", "{AD889579-DE61-4290-83D1-C2F60B704B8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{6259BC18-57E1-45B4-9963-04CE601F59EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6259BC18-57E1-45B4-9963-04CE601F59EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6259BC18-57E1-45B4-9963-04CE601F59EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B5846CC-4E29-425F-9072-A31DED225D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5846CC-4E29-425F-9072-A31DED225D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5846CC-4E29-425F-9072-A31DED225D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5846CC-4E29-425F-9072-A31DED225D98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD889579-DE61-4290-83D1-C2F60B704B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD889579-DE61-4290-83D1-C2F60B704B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD889579-DE61-4290-83D1-C2F60B704B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD889579-DE61-4290-83D1-C2F60B704B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

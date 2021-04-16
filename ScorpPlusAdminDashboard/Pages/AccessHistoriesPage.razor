@@ -1,0 +1,52 @@
+﻿@page "/accessHistories/{EmployeeId}"
+@using ScorpPlus.Contexts
+@using ScorpPlus.Models
+@using Microsoft.EntityFrameworkCore
+@inject EmployeeContext EmployeeContext
+
+<h1>@_employee.ToString() access history</h1>
+
+<table class="table table-striped table-bordered">
+    <tr class="text-center">
+        <th scope="col">Room</th>
+        <th scope="col">Time</th>
+        <th scope="col">Device</th>
+        <th scope="col">Status</th>
+    </tr>
+    <tbody>
+    @foreach (var accessHistory in _employee.AccessHistories)
+    {
+        <tr>
+            <th scope="row">@accessHistory.Room?.Code</th>
+            <td>@accessHistory.Relevance</td>
+            <td>@accessHistory.Device?.Code</td>
+            @if (accessHistory.Status != null && accessHistory.Status.Value)
+            {
+                <td>Entered</td>
+            }
+            @if (accessHistory.Status != null && !accessHistory.Status!.Value)
+            {
+                <td>Exited</td>
+            }
+            @if (accessHistory.Status == null)
+            {
+                <td></td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+
+    [Parameter]
+    public string EmployeeId { get; set; }
+
+    private Employee _employee;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _employee = EmployeeContext.Employees.Include(x => x.AccessHistories).ThenInclude(x => x.Device).FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
+    }
+
+}

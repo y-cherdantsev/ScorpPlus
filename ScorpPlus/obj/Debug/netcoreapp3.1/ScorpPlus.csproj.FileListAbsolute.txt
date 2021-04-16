@@ -1,0 +1,9 @@
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\bin\Debug\netcoreapp3.1\ScorpPlus.deps.json
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\bin\Debug\netcoreapp3.1\ScorpPlus.dll
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\bin\Debug\netcoreapp3.1\ScorpPlus.pdb
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\obj\Debug\netcoreapp3.1\ScorpPlus.csprojAssemblyReference.cache
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\obj\Debug\netcoreapp3.1\ScorpPlus.AssemblyInfoInputs.cache
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\obj\Debug\netcoreapp3.1\ScorpPlus.AssemblyInfo.cs
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\obj\Debug\netcoreapp3.1\ScorpPlus.csproj.CoreCompileInputs.cache
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\obj\Debug\netcoreapp3.1\ScorpPlus.dll
+C:\Users\echerdantsev\Documents\ScorpPlus\ScorpPlusBackend\ScorpPlus\obj\Debug\netcoreapp3.1\ScorpPlus.pdb

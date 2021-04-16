@@ -90,13 +90,13 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         /// Login route
         /// </summary>
         /// <code>POST /login</code>
-        /// <param name="username">Username of an user</param>
-        /// <param name="password">Password of an user</param>
+        /// <param name="userCredentials">Username and password of an user</param>
         /// <returns>Response with result status and bearer token</returns>
-        [HttpPost("login")]
-        public IActionResult PostLogin(string username, string password)
+        [HttpPost("token")]
+        public IActionResult PostLogin([FromBody] User userCredentials)
         {
-            password = EncryptPassword(password);
+            var username = userCredentials.Username;
+            var password = EncryptPassword(userCredentials.Password);
 
             var user = _userContext.Users.Include(x => x.Role)
                 .FirstOrDefault(x => x.Username == username && x.Password == password);
@@ -127,7 +127,6 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 status = true,
                 data = new
                 {
-                    token = encodedJwt,
                     username = identity.Name
                 }
             };

@@ -1,4 +1,5 @@
 using ScorpPlusBackend.Contexts;
+using ScorpPlusBackend.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,9 @@ namespace ScorpPlusBackend
             services.AddDbContext<NotificationContext>(opt =>
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
 
+            // Starts background analyzer
+            // new BackgroundAnalyzer().Start();
+            
             // Configuring JWT service
             var jwtConfiguration = Configuration.GetSection("Jwt");
             Options.JwtOptions = new Options.Jwt
