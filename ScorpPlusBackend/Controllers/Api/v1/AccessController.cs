@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using ScorpPlus.Models;
+using ScorpPlus.Contexts;
 using System.Threading.Tasks;
-using ScorpPlusBackend.Models;
 using Microsoft.AspNetCore.Mvc;
-using ScorpPlusBackend.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 

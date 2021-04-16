@@ -2,17 +2,17 @@
 using System.Net;
 using System.Linq;
 using System.Text;
+using ScorpPlus.Models;
+using ScorpPlus.Contexts;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ScorpPlusBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using ScorpPlusBackend.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Konscious.Security.Cryptography;
-using ScorpPlusBackend.Services.Notifications;
+using ScorpPlus.Services.Notifications;
 
 namespace ScorpPlusBackend.Controllers.Api.v1
 {

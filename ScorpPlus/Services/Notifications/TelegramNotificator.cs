@@ -1,9 +1,9 @@
 ﻿using Telegram.Bot;
+using ScorpPlus.Models;
 using System.Threading.Tasks;
-using ScorpPlusBackend.Models;
 using System.Collections.Generic;
 
-namespace ScorpPlusBackend.Services.Notifications
+namespace ScorpPlus.Services.Notifications
 {
     /// <summary>
     /// Telegram notification system
@@ -33,10 +33,10 @@ namespace ScorpPlusBackend.Services.Notifications
         /// <summary>
         /// Telegram Notificator constructor
         /// </summary>
-        /// <param name="telegramOptions">Configuration of telegram bot</param>
-        public TelegramNotificator(Options.TelegramBotDto telegramOptions)
+        /// <param name="telegramBotToken">Token of telegram bot</param>
+        public TelegramNotificator(string telegramBotToken)
         {
-            _bot = new TelegramBotClient(telegramOptions.Token);
+            _bot = new TelegramBotClient(telegramBotToken);
         }
 
         /// <inheritdoc />

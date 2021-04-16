@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using ScorpPlusBackend.Models;
+﻿using ScorpPlus.Models;
+using System.Threading.Tasks;
 
-namespace ScorpPlusBackend.Services.Notifications
+namespace ScorpPlus.Services.Notifications
 {
     /// <summary>
     /// Notificator interface for implementing notification systems

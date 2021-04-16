@@ -1,12 +1,11 @@
-using ScorpPlusBackend.Contexts;
-using ScorpPlusBackend.Services;
+using ScorpPlus.Contexts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ScorpPlus.Services.Notifications;
 using Microsoft.Extensions.Configuration;
-using ScorpPlusBackend.Services.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -57,7 +56,7 @@ namespace ScorpPlusBackend
 
             // Starts background analyzer
             // new BackgroundAnalyzer().Start();
-            
+
             // Configuring JWT service
             var jwtConfiguration = Configuration.GetSection("Jwt");
             Options.JwtOptions = new Options.Jwt
@@ -69,22 +68,17 @@ namespace ScorpPlusBackend
             };
 
             // Configuring notification service
-            var telegramConfiguration = Configuration.GetSection("TelegramBot");
-            Options.TelegramBot = new Options.TelegramBotDto
-            {
-                Token = telegramConfiguration["Token"]
-            };
+            var telegramBotConfiguration = Configuration.GetSection("TelegramBot");
+            services.AddSingleton(new TelegramNotificator(telegramBotConfiguration["Token"]));
 
             var mailingConfiguration = Configuration.GetSection("MailingServer");
-            Options.MailingServer = new Options.MailingServerDto
-            {
-                Host = mailingConfiguration["Host"],
-                Port = int.Parse(mailingConfiguration["Port"]),
-                Username = mailingConfiguration["Username"],
-                Password = mailingConfiguration["Password"],
-                MailName = mailingConfiguration["MailName"],
-                MailAddress = mailingConfiguration["MailAddress"]
-            };
+            services.AddSingleton(new EmailNotificator(
+                mailingConfiguration["Username"],
+                mailingConfiguration["Password"],
+                mailingConfiguration["MailName"],
+                mailingConfiguration["MailAddress"],
+                mailingConfiguration["Host"],
+                int.Parse(mailingConfiguration["Port"])));
 
             services.AddScoped<NotificationService>();
 

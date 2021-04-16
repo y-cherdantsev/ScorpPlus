@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ScorpPlus.Models;
+﻿using ScorpPlus.Models;
+using Microsoft.EntityFrameworkCore;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 

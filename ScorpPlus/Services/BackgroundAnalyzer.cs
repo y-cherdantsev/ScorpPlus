@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace ScorpPlusBackend.Services
+namespace ScorpPlus.Services
 {
     public class BackgroundAnalyzer
     {

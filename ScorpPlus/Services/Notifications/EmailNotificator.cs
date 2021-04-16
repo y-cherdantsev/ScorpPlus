@@ -1,11 +1,11 @@
 ﻿using MimeKit;
 using MailKit.Security;
 using MailKit.Net.Smtp;
+using ScorpPlus.Models;
 using System.Threading.Tasks;
-using ScorpPlusBackend.Models;
 using System.Collections.Generic;
 
-namespace ScorpPlusBackend.Services.Notifications
+namespace ScorpPlus.Services.Notifications
 {
     /// <summary>
     /// Email notification system
@@ -106,13 +106,12 @@ namespace ScorpPlusBackend.Services.Notifications
         /// <summary>
         /// Email Notificator constructor
         /// </summary>
-        /// <param name="mailingServerOptions">Configuration of mailing server</param>
-        public EmailNotificator(Options.MailingServerDto mailingServerOptions)
+        public EmailNotificator(string mailServerUsername, string mailServerPassword, string mailServerName, string mailServerAddress, string mailServeHost, int mailServerPort)
         {
             _smtpClient = new SmtpClient {ServerCertificateValidationCallback = (s, c, h, e) => true};
-            _smtpClient.Connect(mailingServerOptions.Host, mailingServerOptions.Port, SecureSocketOptions.SslOnConnect);
-            _smtpClient.Authenticate(mailingServerOptions.Username, mailingServerOptions.Password);
-            _mailboxAddress = new MailboxAddress(mailingServerOptions.MailName, mailingServerOptions.MailAddress);
+            _smtpClient.Connect(mailServeHost, mailServerPort, SecureSocketOptions.SslOnConnect);
+            _smtpClient.Authenticate(mailServerUsername, mailServerPassword);
+            _mailboxAddress = new MailboxAddress(mailServerName, mailServerAddress);
         }
 
         /// <inheritdoc />

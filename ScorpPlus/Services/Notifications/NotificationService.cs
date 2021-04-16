@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using ScorpPlus.Contexts;
 using System.Threading.Tasks;
-using ScorpPlusBackend.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace ScorpPlusBackend.Services.Notifications
+namespace ScorpPlus.Services.Notifications
 {
     /// <summary>
     /// Service that sends notification about some activities in scorp system
@@ -30,11 +30,13 @@ namespace ScorpPlusBackend.Services.Notifications
         /// Constructor for notification service
         /// </summary>
         /// <param name="notificationContext">Notification context</param>
-        public NotificationService(NotificationContext notificationContext)
+        /// <param name="telegramNotificator">Telegram notificator</param>
+        /// <param name="emailNotificator">Mail notificator</param>
+        public NotificationService(NotificationContext notificationContext, TelegramNotificator telegramNotificator, EmailNotificator emailNotificator)
         {
             _notificationContext = notificationContext;
-            _telegramNotificator = new TelegramNotificator(Options.TelegramBot);
-            _emailNotificator = new EmailNotificator(Options.MailingServer);
+            _telegramNotificator = telegramNotificator;
+            _emailNotificator = emailNotificator;
         }
 
         /// <summary>
