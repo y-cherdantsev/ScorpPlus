@@ -1,3 +1,4 @@
+using System.Text;
 using ScorpPlus.Contexts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
@@ -22,13 +23,8 @@ namespace ScorpPlusBackend
         /// <param name="configuration">API configuration</param>
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Program.Configuration = configuration;
         }
-
-        /// <summary>
-        /// API configurations
-        /// </summary>
-        private IConfiguration Configuration { get; }
 
         /// <summary>
         /// Configuring API services
@@ -37,7 +33,7 @@ namespace ScorpPlusBackend
         public void ConfigureServices(IServiceCollection services)
         {
             // Adding DB contexts
-            var dbConnectionString = Configuration.GetConnectionString("ScorpPlusDb");
+            var dbConnectionString = Program.Configuration.GetConnectionString("ScorpPlusDb");
 
             services.AddDbContext<UserContext>(opt =>
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
@@ -57,21 +53,11 @@ namespace ScorpPlusBackend
             // Starts background analyzer
             // new BackgroundAnalyzer().Start();
 
-            // Configuring JWT service
-            var jwtConfiguration = Configuration.GetSection("Jwt");
-            Options.JwtOptions = new Options.Jwt
-            {
-                Audience = jwtConfiguration["Audience"],
-                Issuer = jwtConfiguration["Issuer"],
-                Key = jwtConfiguration["Key"],
-                Lifetime = int.Parse(jwtConfiguration["Lifetime"])
-            };
-
             // Configuring notification service
-            var telegramBotConfiguration = Configuration.GetSection("TelegramBot");
+            var telegramBotConfiguration = Program.Configuration.GetSection("TelegramBot");
             services.AddSingleton(new TelegramNotificator(telegramBotConfiguration["Token"]));
 
-            var mailingConfiguration = Configuration.GetSection("MailingServer");
+            var mailingConfiguration = Program.Configuration.GetSection("MailingServer");
             services.AddSingleton(new EmailNotificator(
                 mailingConfiguration["Username"],
                 mailingConfiguration["Password"],
@@ -81,7 +67,9 @@ namespace ScorpPlusBackend
                 int.Parse(mailingConfiguration["Port"])));
 
             services.AddScoped<NotificationService>();
-
+            
+            // Configuring JWT service
+            var jwtConfiguration = Program.Configuration.GetSection("Jwt");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -89,11 +77,11 @@ namespace ScorpPlusBackend
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = Options.JwtOptions.Issuer,
+                        ValidIssuer = jwtConfiguration["Issuer"],
                         ValidateAudience = true,
-                        ValidAudience = Options.JwtOptions.Audience,
+                        ValidAudience = jwtConfiguration["Audience"],
                         ValidateLifetime = true,
-                        IssuerSigningKey = Options.JwtOptions.SymmetricSecurityKey,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtConfiguration["Key"])),
                         ValidateIssuerSigningKey = true,
                     };
                 });

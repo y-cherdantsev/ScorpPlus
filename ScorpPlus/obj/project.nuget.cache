@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VHzSLjA6+sRGcRVtvr7Qk9mf4lPajfk1OOWhHUaPa7LD6Ral7LpHdxExsUaXnydJo0BkJzulrW2ti2gg2j/7Kg==",
+  "dgSpecHash": "2rGU+ry3eQ3VTWbzIv507VR733CCAZkqpCE71dr9cYgnif+lOoP/IVIwkUk/XdjNuzV1upXgBVqaDTp+9WDx6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlusBackend\\ScorpPlus\\ScorpPlus.csproj",
+  "projectFilePath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlus\\ScorpPlus\\ScorpPlus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\echerdantsev\\.nuget\\packages\\mailkit\\2.10.1\\mailkit.2.10.1.nupkg.sha512",
     "C:\\Users\\echerdantsev\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

@@ -112,13 +112,14 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                     ClaimsIdentity.DefaultRoleClaimType);
 
+            var jwtConfiguration = Program.Configuration.GetSection("Jwt");
             var jwt = new JwtSecurityToken(
-                Options.JwtOptions.Issuer,
-                Options.JwtOptions.Audience,
+                jwtConfiguration["Issuer"],
+                jwtConfiguration["Audience"],
                 notBefore: DateTime.UtcNow,
                 claims: identity.Claims,
-                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(Options.JwtOptions.Lifetime)),
-                signingCredentials: new SigningCredentials(Options.JwtOptions.SymmetricSecurityKey,
+                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(int.Parse(jwtConfiguration["Lifetime"]))),
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtConfiguration["Key"])),
                     SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 

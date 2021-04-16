@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace ScorpPlusBackend
 {
@@ -11,6 +12,11 @@ namespace ScorpPlusBackend
     /// </summary>
     public static class Program
     {
+        /// <summary>
+        /// API configurations
+        /// </summary>
+        public static IConfiguration Configuration { get; set; }
+
         /// <summary>
         /// Entry point of an application
         /// </summary>

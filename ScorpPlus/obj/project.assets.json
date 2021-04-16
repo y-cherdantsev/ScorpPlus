@@ -5598,11 +5598,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlusBackend\\ScorpPlus\\ScorpPlus.csproj",
+      "projectUniqueName": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlus\\ScorpPlus\\ScorpPlus.csproj",
       "projectName": "ScorpPlus",
-      "projectPath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlusBackend\\ScorpPlus\\ScorpPlus.csproj",
+      "projectPath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlus\\ScorpPlus\\ScorpPlus.csproj",
       "packagesPath": "C:\\Users\\echerdantsev\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlusBackend\\ScorpPlus\\obj\\",
+      "outputPath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlus\\ScorpPlus\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\echerdantsev\\AppData\\Roaming\\NuGet\\NuGet.Config"

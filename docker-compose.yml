@@ -1,0 +1,42 @@
+﻿version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    container_name: scorp_stack_db
+    restart: always
+    environment:
+      POSTGRES_DB: scorp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: toor
+    ports:
+      - "127.0.0.1:2345:5432"
+
+  backend:
+    image: scorp_backend
+    container_name: scorp_stack_backend
+    restart: always
+    environment:
+      - ASPNETCORE_URLS=https://+:5051;http://+:5050
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=secret
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - "127.0.0.1:5050:5050"
+      - "127.0.0.1:5051:5051"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  admin_dashboard:
+    image: scorp_admin_dashboard
+    container_name: scorp_stack_admin_dashboard
+    restart: always
+    environment:
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=secret
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - "127.0.0.1:5000:5000"
+      - "127.0.0.1:5001:5001"
+    volumes:
+      - ~/.aspnet/https:/https:ro
