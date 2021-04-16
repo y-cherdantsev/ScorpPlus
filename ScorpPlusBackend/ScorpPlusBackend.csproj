@@ -13,19 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\bin\Debug\netcoreapp3.1\NLog.config" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\NLog.config" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\bin\Debug\netcoreapp3.1\Configuration.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\bin\Debug\netcoreapp3.1\KgCounterpartyParser.deps.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\bin\Debug\netcoreapp3.1\KgCounterpartyParser.runtimeconfig.dev.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\bin\Debug\netcoreapp3.1\KgCounterpartyParser.runtimeconfig.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\Configuration.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\obj\KgCounterpartyParser.csproj.nuget.dgspec.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\obj\project.assets.json" />
-      <_ContentIncludedByDefault Remove="docs\html\Новая папка (2)\kgcounterpartyparser\obj\project.packagespec.json" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ScorpPlus\ScorpPlus.csproj" />
     </ItemGroup>
 
