@@ -3,6 +3,7 @@
 ## List of Projects
 
 * ScorpPlusBackend
+* ScorpPlusAdminDashboard
 
 ## Authors
 
