@@ -11,16 +11,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ScorpPlus.Contexts;
+using ScorpPlus.Services.Notifications;
 
 namespace ScorpPlusAdminDashboard.Pages
 {
     public class Login : PageModel
     {
         private readonly UserContext _userContext;
+        private readonly NotificationService _notificationService;
         
-        public Login(UserContext userContext)
+        public Login(UserContext userContext, NotificationService notificationService)
         {
             _userContext = userContext;
+            _notificationService = notificationService;
         }
         
         public async Task<IActionResult>
@@ -58,6 +61,8 @@ namespace ScorpPlusAdminDashboard.Pages
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
+            _notificationService.Notify("admin", $"User '{user.Username}' with '{user.Id}' id entered the system",
+                NotificationType.UserAuthorized);
             return LocalRedirect("/");
         }
         

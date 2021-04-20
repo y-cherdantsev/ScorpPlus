@@ -1,0 +1,46 @@
+﻿@page "/devices"
+@using ScorpPlus.Contexts
+@using ScorpPlus.Models
+@using Microsoft.EntityFrameworkCore
+@inject DeviceContext DeviceContext
+
+<table class="table table-striped table-bordered">
+    <tr class="text-center">
+        <th scope="col">Id</th>
+        <th scope="col">Type</th>
+        <th scope="col">Room</th>
+        <th scope="col">Description</th>
+        <th scope="col">Details</th>
+    </tr>
+    <tbody>
+    @foreach (var device in _devices)
+    {
+        <tr>
+            <th scope="row">@device.Id</th>
+            <td>@device.Type.Description</td>
+            <td>
+                <form action="/room/@device.RoomId" method="get">
+                    <button class="btn btn-primary" type="submit">@device.Room.Description</button>
+                </form>
+            </td>
+            <td>@device.Description</td>
+            <td class="text-center">
+                <form action="/device/@device.Id" method="get">
+                    <button class="btn btn-primary" type="submit">Show</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code{
+
+    Device[] _devices;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _devices = DeviceContext.Devices.Include(x => x.Room).Include(x => x.Type).ToArray();
+    }
+
+}

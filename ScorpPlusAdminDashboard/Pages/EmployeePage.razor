@@ -1,0 +1,57 @@
+﻿@page "/employee/{EmployeeId}"
+@using ScorpPlus.Models
+@inject EmployeeContext EmployeeContext
+@inject IndividualService IndividualService
+@using ScorpPlus.Contexts
+@using Microsoft.EntityFrameworkCore
+@using ScorpPlus.Dtos
+@using ScorpPlus.Services
+@attribute [Authorize(Roles = "admin, manager")]
+
+@if (_employee!.Iin == null)
+{
+    <h2>To get additional data insert employee IIN</h2>
+}
+
+@if (_employee!.Iin != null)
+{
+    if (_individualInfoData == null)
+    {
+        <h1>Loading additional data...</h1>
+    }
+    else
+    {
+        
+        <h1>Fullname: @_individualInfoData.BasicFl.Name</h1>
+        <h1><a href="http://@_individualInfoData.BasicFl.SourceLink">Adata Link</a></h1>
+        
+        if (_individualInfoData.ReliabilityFl.Terrorist)
+        {
+            <h1>Exist in terrorist list</h1>
+        }
+        if (_individualInfoData.ReliabilityFl.Pedophile)
+        {
+            <h1>Exist in pedophiles list</h1>
+        }
+        if (_individualInfoData.ReliabilityFl.AlimonyPayer)
+        {
+            <h1>Exist in alimony payers list</h1>
+        }
+    }
+}
+
+@code {
+    Employee _employee;
+    IndividualInfoData _individualInfoData;
+
+    [Parameter]
+    public string EmployeeId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _employee = EmployeeContext.Employees.Include(x => x.Accesses).Include(x => x.AccessHistories).FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
+        if (_employee!.Iin != null)
+            _individualInfoData = await IndividualService.GetIndividualData((long) _employee.Iin);
+    }
+
+}

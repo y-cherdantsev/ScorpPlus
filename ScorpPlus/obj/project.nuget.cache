@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2rGU+ry3eQ3VTWbzIv507VR733CCAZkqpCE71dr9cYgnif+lOoP/IVIwkUk/XdjNuzV1upXgBVqaDTp+9WDx6Q==",
+  "dgSpecHash": "A8La8NXHnHe2CmwKN111+J80FnvnYNm4RLGw7wu+b15Y3VSqO0iUAXhc1KiR75aewZPTmc339XmYGRc/dmtWUw==",
   "success": true,
   "projectFilePath": "C:\\Users\\echerdantsev\\Documents\\ScorpPlus\\ScorpPlus\\ScorpPlus\\ScorpPlus.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\echerdantsev\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\echerdantsev\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\echerdantsev\\.nuget\\packages\\portable.bouncycastle\\1.8.8\\portable.bouncycastle.1.8.8.nupkg.sha512",
+    "C:\\Users\\echerdantsev\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
     "C:\\Users\\echerdantsev\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\echerdantsev\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\echerdantsev\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

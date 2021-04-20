@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScorpPlus.Contexts;
+using ScorpPlus.Services;
+using ScorpPlus.Services.Notifications;
 
 namespace ScorpPlusAdminDashboard
 {
@@ -40,12 +42,34 @@ namespace ScorpPlusAdminDashboard
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
             services.AddDbContext<EmployeeContext>(opt =>
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<DeviceContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<RoomContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<NotificationContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
 
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
+            // Configuring notification service
+            var telegramBotConfiguration = Configuration.GetSection("TelegramBot");
+            services.AddSingleton(new TelegramNotificator(telegramBotConfiguration["Token"]));
+
+            var mailingConfiguration = Configuration.GetSection("MailingServer");
+            services.AddSingleton(new EmailNotificator(
+                mailingConfiguration["Username"],
+                mailingConfiguration["Password"],
+                mailingConfiguration["MailName"],
+                mailingConfiguration["MailAddress"],
+                mailingConfiguration["Host"],
+                int.Parse(mailingConfiguration["Port"])));
+
+            services.AddScoped<NotificationService>();
+            
             services.AddAuthentication(
                     CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
@@ -55,6 +79,7 @@ namespace ScorpPlusAdminDashboard
             services.AddServerSideBlazor();
             services.AddHttpContextAccessor();
             services.AddScoped<HttpContextAccessor>();
+            services.AddSingleton(new IndividualService(Configuration["AdataToken"]));
             services.AddHttpClient();
             services.AddScoped<HttpClient>();
         }

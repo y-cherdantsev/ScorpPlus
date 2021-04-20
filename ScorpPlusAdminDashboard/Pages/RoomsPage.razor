@@ -1,0 +1,14 @@
+﻿@page "/rooms"
+@using ScorpPlus.Models
+@using ScorpPlus.Contexts
+@inject RoomContext RoomContext
+
+@code {
+    Room[] _rooms;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _rooms = RoomContext.Rooms.ToArray();
+    }
+
+}
