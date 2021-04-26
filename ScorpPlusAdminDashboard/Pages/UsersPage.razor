@@ -1,0 +1,41 @@
+﻿@page "/users"
+@using System.Linq
+@using Microsoft.EntityFrameworkCore
+@using ScorpPlus.Models
+@using ScorpPlus.Contexts
+@inject UserContext UserContext
+@attribute [Authorize(Roles = "admin")]
+
+<table class="table table-striped table-bordered">
+    <tr class="text-center">
+        <th scope="col">Id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+    </tr>
+    <tbody>
+    @foreach (var user in _users)
+    {
+        <tr>
+            <th scope="row">@user.Id</th>
+            <td class="text-left">
+                <form action="/user/@user.Id" method="get">
+                    <button class="btn btn-primary" type="submit">@user.Username</button>
+                </form>
+            </td>
+            <td>@user.Email</td>
+            <td>@user.Role.Code</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code
+{
+    private User[] _users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _users = UserContext.Users.Include(x=> x.Role).ToArray();
+    }
+}

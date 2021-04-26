@@ -2,6 +2,13 @@
 @using ScorpPlus.Models
 @using ScorpPlus.Contexts
 @inject RoomContext RoomContext
+@attribute [Authorize(Roles = "admin, manager")]
+
+@* todo(Implement class) *@
+@foreach (var room in _rooms)
+{
+    @room.Description;
+}
 
 @code {
     Room[] _rooms;

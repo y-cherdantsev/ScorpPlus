@@ -1,0 +1,18 @@
+﻿@page "/room/{RoomId}"
+@using ScorpPlus.Models
+@using ScorpPlus.Contexts
+@inject RoomContext RoomContext
+<h3>@_room.Description</h3>
+
+@code {
+    Room _room;
+
+    [Parameter]
+    public string RoomId { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _room = RoomContext.Rooms.FirstOrDefault(x => x.Id == int.Parse(RoomId));
+    }
+
+}

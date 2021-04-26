@@ -1,0 +1,20 @@
+﻿@page "/user/{UserId}"
+@using ScorpPlus.Models
+@using ScorpPlus.Contexts
+@inject UserContext UserContext
+@attribute [Authorize(Roles = "admin")]
+@* todo(Implement) *@
+<h3>@_user.Username</h3>
+
+@code {
+    User _user;
+
+    [Parameter]
+    public string UserId { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _user = UserContext.Users.FirstOrDefault(x => x.Id == int.Parse(UserId));
+    }
+
+}
