@@ -21,10 +21,10 @@ namespace ScorpPlus.Services
         {
             var token = await SendRequestAsync(iin);
             var individualInfoResult = new IndividualInfoResult {Success = false};
-            var leftAttempts = 5;
-            while (!individualInfoResult.Success && --leftAttempts > 0)
+            var leftAttempts = 40;
+            while (individualInfoResult.Message != "ready" && --leftAttempts > 0 )
             {
-                await Task.Delay(500);
+                await Task.Delay(3000);
                 individualInfoResult = await GetResultAsync(token);
             }
 

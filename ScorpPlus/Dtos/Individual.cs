@@ -29,8 +29,16 @@
 
     public class IndividualInfoReliabilityFl
     {
+        public bool BanLeaving { get; set; }
+        public bool EnforcementDebt { set; get; }
         public bool Terrorist { get; set; }
         public bool Pedophile { get; set; }
         public bool AlimonyPayer { get; set; }
+        public bool SeizedProperty { get; set; }
+        public bool SeizedBankAccount { get; set; }
+        public bool BanRegistrationActionsLegalEnt { get; set; }
+        public bool BanRegistrationActionsPhysicalEnt { get; set; }
+        public bool BanNotariusActions { get; set; }
+        public bool BanSeizedPropertyActions { get; set; }
     }
 }

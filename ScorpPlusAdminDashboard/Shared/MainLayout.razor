@@ -4,8 +4,9 @@
     <NavMenu/>
 </div>
 <div class="main">
-    <div class="top-row px-4">
+    <div class="top-row px-4" style="z-index: 100">
         <AuthorizeView>
+            <h2 style="padding-right: 2rem">@context.User.Identity.Name     </h2>
             <form action="/logout" method="get">
                 <button class="btn btn-danger btn-block">Logout</button>
             </form>
