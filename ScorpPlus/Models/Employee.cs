@@ -75,6 +75,8 @@ namespace ScorpPlus.Models
 
         }
 
+        public string GetIin() =>  Iin == null ? null : Iin.ToString().PadLeft(12, '0');
+
         public override string ToString()
         {
             return $"{LastName} {FirstName} {MiddleName}".Trim();

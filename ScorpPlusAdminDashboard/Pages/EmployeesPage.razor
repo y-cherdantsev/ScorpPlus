@@ -23,7 +23,7 @@
                     <button class="btn btn-primary" type="submit">@employee.ToString()</button>
                 </form>
             </td>
-            <td>@employee.Iin</td>
+            <td>@employee.GetIin()</td>
             <td>@employee.GetBirthDate()</td>
             <td class="text-center">
                 <form action="/accessHistories/@employee.Id" method="get">

@@ -6,6 +6,7 @@
 @using Microsoft.EntityFrameworkCore
 @using ScorpPlus.Dtos
 @using ScorpPlus.Services
+@using System.Text.RegularExpressions
 @attribute [Authorize(Roles = "admin, manager")]
 
 <div class="container">
@@ -20,13 +21,37 @@
                     @if (!_editMode)
                     {
                         <h4>@_employee.LastName @_employee.FirstName</h4>
-                        <p class="text-secondary mb-1">IIN: @_employee.Iin</p>
+                        <p class="text-secondary mb-1">IIN: @_employee.GetIin()</p>
                         <p class="text-muted font-size-sm">Birth Date: @_employee.GetBirthDate()</p>
                         <button class="btn btn-outline-primary" @onclick="ChangeEditMode">Edit</button>
                     }
                     else
                     {
-                        <button class="btn btn-primary" @onclick="ChangeEditMode">Save</button>
+                        <input type="text" class="form-control" placeholder="Last Name" @bind="@_employee.LastName" @oninput="@((e) => { _employee.LastName = (string) e.Value; })">
+                        <br>
+                        <input type="text" class="form-control" placeholder="First Name" @bind="@_employee.FirstName" @oninput="@((e) => { _employee.FirstName = (string) e.Value; })">
+                        <br>
+                        <input type="text" class="form-control" placeholder="Middle Name" @bind="@_employee.MiddleName" @oninput="@(e => { _employee.MiddleName = (string) e.Value; })">
+                        <br>
+                        <span>IIN:</span>
+                        <input type="text" maxlength="12" placeholder="IIN" @bind="IinInput">
+
+                        if (string.IsNullOrEmpty(IinInput) || new Regex("[0-9]{12}").IsMatch(IinInput))
+                        {
+                            <button class="btn btn-primary" @onclick="UpdateIin">Set</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-outline-primary" disabled>Set</button>
+                        }
+
+                        <br>
+                        <br>
+                        <span>Birth Date:</span>
+                        <input type="date" @bind="@_employee.BirthDate" @oninput="@(e => { _employee.BirthDate = DateTime.Parse((string) e.Value); })" @bind:format="yyyy-MM-dd">
+                        <hr>
+                        <button class="btn btn-primary" @onclick="SaveEditForm">Save</button>
+                        <button class="btn btn-outline-danger" @onclick="CancelEditForm">Cancel</button>
                     }
                 </div>
             </div>
@@ -85,11 +110,15 @@
 </div>
 @if (_employee!.Iin == null)
 {
-    <h2 style="color: red">To get additional data insert employees IIN</h2>
+    <div class="title text-center">
+        <h2 style="color: red; font-size: 14px;">To get additional data insert employees IIN</h2>
+    </div>
 }
 @if (_employee!.Iin != null && !_checkFlag)
 {
-    <div class="text-center"><button class="btn btn-outline-primary" @onclick="ExtendedCheck">Extended check</button></div>
+    <div class="text-center">
+        <button class="btn btn-outline-primary" @onclick="ExtendedCheck">Extended check</button>
+    </div>
 }
 
 @if (_employee!.Iin != null && _checkFlag)
@@ -101,7 +130,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -117,7 +147,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -140,7 +171,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -163,7 +195,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -186,7 +219,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -209,7 +243,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -232,7 +267,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -255,7 +291,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -278,7 +315,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -301,7 +339,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -324,7 +363,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -347,7 +387,8 @@
         <div class="col-sm-9 text-secondary">
             @if (_individualInfoData == null)
             {
-                <img  style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/><span>    Loading data...</span>
+                <img style="height: 12px; width: 12px" src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"/>
+                <span> Loading data...</span>
             }
             else
             {
@@ -464,6 +505,8 @@
     bool _checkFlag;
     bool _editMode;
 
+    private string IinInput { get; set; }
+
     [Parameter]
     public string EmployeeId { get; set; }
 
@@ -473,20 +516,42 @@
             .Include(x => x.Accesses)
             .Include(x => x.Accesses).ThenInclude(x => x.Room)
             .Include(x => x.AccessHistories).ThenInclude(x => x.Room)
+            .ToList()
             .FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
-    // if (_employee!.Iin != null)
-    // _individualInfoData = await IndividualService.GetIndividualData((long) _employee.Iin);
+        IinInput = string.IsNullOrEmpty(_employee!.GetIin()) ? null : _employee.GetIin();
     }
 
-    protected async Task ExtendedCheck()
+    public async Task ExtendedCheck()
     {
         _checkFlag = true;
         if (_employee!.Iin != null)
             _individualInfoData = await IndividualService.GetIndividualData((long) _employee.Iin);
     }
-    protected async Task ChangeEditMode()
+
+    private async Task UpdateIin()
     {
+        if (!string.IsNullOrEmpty(IinInput) && new Regex("[0-9]{12}").IsMatch(IinInput))
+            _employee.Iin = long.Parse(IinInput);
+        else _employee.Iin = null;
+    }
+
+    private async Task ChangeEditMode()
+    {
+        IinInput = string.IsNullOrEmpty(_employee!.GetIin()) ? null : _employee.GetIin();
         _editMode = !_editMode;
+    }
+
+    private async Task SaveEditForm()
+    {
+        EmployeeContext.Employees.Update(_employee);
+        await EmployeeContext.SaveChangesAsync();
+        await ChangeEditMode();
+    }
+
+    private async Task CancelEditForm()
+    {
+        await EmployeeContext.Entry(_employee).ReloadAsync();
+        await ChangeEditMode();
     }
 
 }
