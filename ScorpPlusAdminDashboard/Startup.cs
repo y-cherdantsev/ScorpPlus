@@ -48,6 +48,8 @@ namespace ScorpPlusAdminDashboard
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
             services.AddDbContext<NotificationContext>(opt =>
                 opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
+            services.AddDbContext<AccessContext>(opt =>
+                opt.UseNpgsql(dbConnectionString), ServiceLifetime.Transient);
 
             services.Configure<CookiePolicyOptions>(options =>
             {

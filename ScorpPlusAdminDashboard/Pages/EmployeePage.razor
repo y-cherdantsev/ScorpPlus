@@ -1,7 +1,10 @@
 ﻿@page "/employee/{EmployeeId}"
 @using ScorpPlus.Models
 @inject EmployeeContext EmployeeContext
+@inject AccessContext AccessContext
+@inject RoomContext RoomContext
 @inject IndividualService IndividualService
+@inject NavigationManager NavigationManager;
 @using ScorpPlus.Contexts
 @using Microsoft.EntityFrameworkCore
 @using ScorpPlus.Dtos
@@ -366,7 +369,9 @@
     <div class="col-sm-6 mb-3">
         <div class="card h-100">
             <div class="card-body">
-                <h6 class="d-flex align-items-center mb-3">Access History:</h6>
+                <h6 class="d-flex align-items-center mb-3">
+                    <a href="accessHistories/@_employee.Id">Access History:</a>
+                </h6>
                 @foreach (var access in _employee.AccessHistories.OrderByDescending(x => x.Relevance).Take(3))
                 {
                     <small>
@@ -398,6 +403,24 @@
                     </small>
                     <hr style="margin: 0">
                 }
+                <br>@if (_employee.Accesses.Count != RoomContext.Rooms.Count())
+                    {
+                        <div class="row">
+                            <div class="col-10">
+                                <select class="form-control form-select-sm" id="selectAccess" @onchange="ChangeAddAccessValue">
+
+                                    @foreach (var room in RoomContext.Rooms.ToList().Where(x => _employee.Accesses.All(y => y.Room.Id != x.Id)).ToList())
+                                    {
+                                    <option value="@room.Id">@room.Code</option>
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-primary btn-sm" @onclick="AddAccess">Add</button>
+                            </div>
+                        </div>
+                    }
             </div>
         </div>
     </div>
@@ -460,6 +483,7 @@
     IndividualInfoData _individualInfoData;
     bool _checkFlag;
     bool _editMode;
+    private int? AddAccessSelectorValue { get; set; } = null;
 
     private string IinInput { get; set; }
 
@@ -475,6 +499,7 @@
             .ToList()
             .FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
         IinInput = string.IsNullOrEmpty(_employee!.GetIin()) ? null : _employee.GetIin();
+        AddAccessSelectorValue =_employee.Accesses.Count != RoomContext.Rooms.Count() ? RoomContext.Rooms.ToList().Where(x => _employee.Accesses.All(y => y.Room.Id != x.Id)).ToList().First().Id : (int?) null;
     }
 
     private async Task ExtendedCheck()
@@ -508,6 +533,23 @@
     {
         await EmployeeContext.Entry(_employee).ReloadAsync();
         await ChangeEditMode();
+    }
+
+    private async Task ChangeAddAccessValue(ChangeEventArgs e)
+    {
+        AddAccessSelectorValue = int.Parse((string) e.Value);
+    }
+
+    private async Task AddAccess()
+    {
+        if(AddAccessSelectorValue == null) return;
+        await AccessContext.Accesses.AddAsync(new Access
+        {
+            EmployeeId = _employee.Id,
+            RoomId = AddAccessSelectorValue.Value
+        });
+        await AccessContext.SaveChangesAsync();
+        NavigationManager.NavigateTo($"employee/{_employee.Id}", forceLoad: true);
     }
 
 }

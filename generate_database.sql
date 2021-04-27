@@ -89,6 +89,8 @@ CREATE TABLE accesses
             ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE UNIQUE index accesses_employee_id_room_id_uindex
+	ON accesses (employee_id, room_id);
 
 -- device_types table
 CREATE TABLE device_types
