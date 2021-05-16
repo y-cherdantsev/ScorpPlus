@@ -23,7 +23,11 @@
                 <div class="mt-3">
                     @if (!_editMode)
                     {
-                        <h4>@_employee.LastName @_employee.FirstName</h4>
+                        <h4>@_employee.LastName @_employee.FirstName</h4> 
+                        if (_employee.IsInOffice())
+                        {
+                            <p class="text-secondary mb-1"><span style="color:green;">In office</span></p>
+                        }
                         <p class="text-secondary mb-1">IIN: @_employee.GetIin()</p>
                         <p class="text-muted font-size-sm">Birth Date: @_employee.GetBirthDate()</p>
                         <button class="btn btn-outline-primary" @onclick="ChangeEditMode">Edit</button>
@@ -398,29 +402,31 @@
                 <h6 class="d-flex align-items-center mb-3">Allowed Rooms</h6>
                 @foreach (var access in _employee.Accesses)
                 {
+                    <span @onclick="() => RemoveAccess(access.Id)" class="oi oi-x" aria-hidden="true" style="cursor: pointer;"></span>
                     <small>
                         @access.Room.Code
                     </small>
                     <hr style="margin: 0">
                 }
-                <br>@if (_employee.Accesses.Count != RoomContext.Rooms.Count())
-                    {
-                        <div class="row">
-                            <div class="col-10">
-                                <select class="form-control form-select-sm" id="selectAccess" @onchange="ChangeAddAccessValue">
-
-                                    @foreach (var room in RoomContext.Rooms.ToList().Where(x => _employee.Accesses.All(y => y.Room.Id != x.Id)).ToList())
-                                    {
+                <br>
+                @if (_employee.Accesses.Count != RoomContext.Rooms.Count())
+                {
+                    <div class="row">
+                        <div class="col-10">
+                            <select class="form-control form-select-sm" id="selectAccess" @onchange="ChangeAddAccessValue">
+                                looool
+                                @foreach (var room in RoomContext.Rooms.ToList().Where(x => _employee.Accesses.All(y => y.Room.Id != x.Id)).ToList())
+                                {
                                     <option value="@room.Id">@room.Code</option>
-                                    }
+                                }
 
-                                </select>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn btn-primary btn-sm" @onclick="AddAccess">Add</button>
-                            </div>
+                            </select>
                         </div>
-                    }
+                        <div class="col-2">
+                            <button class="btn btn-primary btn-sm" @onclick="AddAccess">Add</button>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -499,7 +505,7 @@
             .ToList()
             .FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
         IinInput = string.IsNullOrEmpty(_employee!.GetIin()) ? null : _employee.GetIin();
-        AddAccessSelectorValue =_employee.Accesses.Count != RoomContext.Rooms.Count() ? RoomContext.Rooms.ToList().Where(x => _employee.Accesses.All(y => y.Room.Id != x.Id)).ToList().First().Id : (int?) null;
+        AddAccessSelectorValue = _employee.Accesses.Count != RoomContext.Rooms.Count() ? RoomContext.Rooms.ToList().Where(x => _employee.Accesses.All(y => y.Room.Id != x.Id)).ToList().First().Id : (int?) null;
     }
 
     private async Task ExtendedCheck()
@@ -542,12 +548,20 @@
 
     private async Task AddAccess()
     {
-        if(AddAccessSelectorValue == null) return;
+        if (AddAccessSelectorValue == null) return;
         await AccessContext.Accesses.AddAsync(new Access
         {
             EmployeeId = _employee.Id,
             RoomId = AddAccessSelectorValue.Value
         });
+        await AccessContext.SaveChangesAsync();
+        NavigationManager.NavigateTo($"employee/{_employee.Id}", forceLoad: true);
+    }
+
+    private async Task RemoveAccess(int accessId)
+    {
+        var access = AccessContext.Accesses.FirstOrDefault(x => x.Id == accessId);
+        AccessContext.Accesses.Remove(access!);
         await AccessContext.SaveChangesAsync();
         NavigationManager.NavigateTo($"employee/{_employee.Id}", forceLoad: true);
     }

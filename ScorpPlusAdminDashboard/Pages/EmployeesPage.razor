@@ -1,5 +1,6 @@
 ﻿@page "/employees"
 @using System.Linq
+@using Microsoft.EntityFrameworkCore
 @using ScorpPlus.Models
 @using ScorpPlus.Contexts
 @inject EmployeeContext EmployeeContext
@@ -11,10 +12,11 @@
         <th scope="col">Fullname</th>
         <th scope="col">IIN</th>
         <th scope="col">Birth Date</th>
+        <th scope="col">In Office</th>
         <th scope="col">Access History</th>
     </tr>
     <tbody>
-    @foreach (var employee in _employees)
+    @foreach (var employee in _employees.OrderBy(x => x.Id))
     {
         <tr>
             <th scope="row">@employee.Id</th>
@@ -25,6 +27,14 @@
             </td>
             <td>@employee.GetIin()</td>
             <td>@employee.GetBirthDate()</td>
+            @if (employee.IsInOffice())
+            {
+                <td><span style="color: green">YES</span></td>
+            }
+            else
+            {
+                <td><span style="color: red">NO</span></td>
+            }
             <td class="text-center">
                 <form action="/accessHistories/@employee.Id" method="get">
                     <button class="btn btn-primary" type="submit">Show</button>
@@ -41,6 +51,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _employees = EmployeeContext.Employees.ToArray();
+        _employees = EmployeeContext.Employees
+            .Include(x => x.AccessHistories)
+            .ThenInclude(x => x.Room)
+            .ToArray();
     }
 }

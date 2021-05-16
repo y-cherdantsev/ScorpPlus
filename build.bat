@@ -26,5 +26,6 @@ echo 'Building scorp stack...'
 docker-compose up -d
 
 echo 'Initializating DB...'
+sleep 8
 psql.exe -h 127.0.0.1 -d scorp -U postgres -W -p 2345 -a -q -f generate_database.sql
 psql.exe -h 127.0.0.1 -d scorp -U postgres -W -p 2345 -a -q -f fill_database.sql

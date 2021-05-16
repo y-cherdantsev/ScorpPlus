@@ -5,6 +5,7 @@
 @attribute [Authorize(Roles = "admin")]
 @* todo(Implement) *@
 <h3>@_user.Username</h3>
+<h3>@_user.Role</h3>
 
 @code {
     User _user;

@@ -4,11 +4,27 @@
 @inject RoomContext RoomContext
 @attribute [Authorize(Roles = "admin, manager")]
 
-@* todo(Implement class) *@
-@foreach (var room in _rooms)
-{
-    @room.Description;
-}
+<table class="table table-striped table-bordered">
+    <tr class="text-center">
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Code</th>
+    </tr>
+    <tbody>
+    @foreach (var room in _rooms.OrderBy(x => x.Id))
+    {
+        <tr>
+            <th scope="row">@room.Id</th>
+            <td class="text-left">
+                <form action="/room/@room.Id" method="get">
+                    <button class="btn btn-primary" type="submit">@room.Description</button>
+                </form>
+            </td>
+            <td>@room.Code</td>
+        </tr>
+    }
+    </tbody>
+</table>
 
 @code {
     Room[] _rooms;

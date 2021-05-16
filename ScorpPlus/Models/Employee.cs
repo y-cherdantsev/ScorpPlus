@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ClassNeverInstantiated.Global
@@ -66,20 +67,34 @@ namespace ScorpPlus.Models
         public string GetBirthDate()
         {
             if (BirthDate != null)
-                return $"{BirthDate.Value.Day.ToString().PadLeft(2, '0')}.{BirthDate.Value.Month.ToString().PadLeft(2, '0')}.{BirthDate.Value.Year}";
+                return
+                    $"{BirthDate.Value.Day.ToString().PadLeft(2, '0')}.{BirthDate.Value.Month.ToString().PadLeft(2, '0')}.{BirthDate.Value.Year}";
             if (Iin == null) return null;
             var iin = Iin.Value.ToString().PadLeft(12, '0');
             var yearNum = int.Parse(iin.Substring(0, 2));
             var year = yearNum < 21 ? $"20{yearNum.ToString().PadLeft(2, '0')}" : $"19{yearNum}";
             return $"{iin.Substring(4, 2)}.{iin.Substring(2, 2)}.{year}";
-
         }
 
-        public string GetIin() =>  Iin == null ? null : Iin.ToString().PadLeft(12, '0');
+        public string GetIin() => Iin == null ? null : Iin.ToString().PadLeft(12, '0');
 
-        public override string ToString()
+        public override string ToString() => $"{LastName} {FirstName} {MiddleName}".Trim();
+
+        public bool IsInOffice()
         {
-            return $"{LastName} {FirstName} {MiddleName}".Trim();
+            try
+            {
+                if (!AccessHistories.Any()) return false;
+                var lastEntry = AccessHistories.OrderByDescending(x => x.Relevance)
+                    .FirstOrDefault(x => x.Room.Code == "entry");
+                if (lastEntry == null) return false;
+                return lastEntry.Status != null && (bool) lastEntry.Status;
+
+            }
+            catch (Exception)
+            {
+                throw new Exception("Include rooms into AccessHistory entities");
+            }
         }
     }
 }

@@ -1,18 +1,163 @@
 ﻿@page "/room/{RoomId}"
 @using ScorpPlus.Models
 @using ScorpPlus.Contexts
+@using Microsoft.EntityFrameworkCore
+@using Plotly.Blazor
+@using Plotly.Blazor.LayoutLib
+@using Plotly.Blazor.Traces
+@using Plotly.Blazor.Traces.ScatterLib
 @inject RoomContext RoomContext
 <h3>@_room.Description</h3>
 
+@if (_room.AccessHistories.Count > 0)
+{
+    <h1 class="text-center">Access history</h1>
+    <table class="table table-striped table-bordered">
+        <tr class="text-center">
+            <th scope="col">Time</th>
+            <th scope="col">Device</th>
+            <th scope="col">Status</th>
+            <th scope="col">Employee</th>
+        </tr>
+        <tbody>
+        @foreach (var accessHistory in _room.AccessHistories.OrderByDescending(x => x.Relevance).Take(15))
+        {
+            <tr>
+                <td>@accessHistory.Relevance</td>
+                <td>@accessHistory.Device?.Code</td>
+                @if (accessHistory.Status != null && accessHistory.Status.Value)
+                {
+                    <td>Entered</td>
+                }
+                @if (accessHistory.Status != null && !accessHistory.Status!.Value)
+                {
+                    <td>Exited</td>
+                }
+                @if (accessHistory.Status == null)
+                {
+                    <td></td>
+                }
+                <td class="text-left">
+                    <form action="/employee/@accessHistory.Employee.Id" method="get">
+                        <button class="btn btn-primary" type="submit">@accessHistory.Employee.ToString()</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+<br>
+@if (_room.AccessHistories.Count > 0)
+{
+    <h1 class="text-center">Devices</h1>
+    <table class="table table-striped table-bordered">
+        <tr class="text-center">
+            <th scope="col">Id</th>
+            <th scope="col">Code</th>
+            <th scope="col">Description</th>
+            <th scope="col">Type</th>
+        </tr>
+        <tbody>
+        @foreach (var device in _room.Devices)
+        {
+            <tr>
+                <th>@device.Id</th>
+                <td class="text-left">
+                    <form action="/device/@device.Id" method="get">
+                        <button class="btn btn-primary" type="submit">@device.Code</button>
+                    </form>
+                </td>
+                <td>@device.Description</td>
+                <td>@device.Type</td>
+
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+<br>
+@if (_room.ClimateHistories.Count > 0)
+{
+    <h1 class="text-center">Sensors data</h1>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <PlotlyChart @bind-Config="_plotlyConfig" @bind-Layout="_plotlyTemperatureLayout" @bind-Data="_temperatureData"/>
+            </div>
+            <div class="col-6">
+                <PlotlyChart @bind-Config="_plotlyConfig" @bind-Layout="_plotlyHumidityLayout" @bind-Data="_humidityData"/>
+            </div>
+            <div class="col-6">
+                <PlotlyChart @bind-Config="_plotlyConfig" @bind-Layout="_plotlyPressureLayout" @bind-Data="_pressureData"/>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
+
+    Config _plotlyConfig = new Config();
+    Layout _plotlyHumidityLayout = new Layout {Title = new Title {Text = "Humidity"}, Width = (decimal) 0.5};
+    Layout _plotlyTemperatureLayout = new Layout {Title = new Title {Text = "Temperature"}};
+    Layout _plotlyPressureLayout = new Layout {Title = new Title {Text = "Pressure"}, Width = (decimal) 0.5};
+    // Using of the interface IList is important for the event callback!
+    IList<ITrace> _humidityData;
+    IList<ITrace> _temperatureData;
+    IList<ITrace> _pressureData;
+
+
     Room _room;
 
     [Parameter]
     public string RoomId { get; set; }
-    
+
     protected override async Task OnInitializedAsync()
     {
-        _room = RoomContext.Rooms.FirstOrDefault(x => x.Id == int.Parse(RoomId));
+        _room = RoomContext.Rooms
+            .Include(x => x.ClimateHistories)
+            .Include(x => x.AccessHistories)
+            .ThenInclude(x => x.Device)
+            .Include(x => x.AccessHistories)
+            .ThenInclude(x => x.Employee)
+            .Include(x => x.Devices)
+            .FirstOrDefault(x => x.Id == int.Parse(RoomId));
+        var dates = new List<object>(_room!.ClimateHistories.Select(x => x.Relevance.ToString("dd/MM/yyyy HH:mm:ss")).ToList());
+        var humidity = new List<object>(_room.ClimateHistories.Select(x => x.Humidity.ToString()).ToList());
+        var pressure = new List<object>(_room.ClimateHistories.Select(x => x.Pressure.ToString()).ToList());
+        var temperature = new List<object>(_room.ClimateHistories.Select(x => x.Temperature.ToString()).ToList());
+        _humidityData = new List<ITrace>
+        {
+            new Scatter
+            {
+                Name = "Humidity",
+                Mode = ModeFlag.Lines | ModeFlag.Markers,
+                X = dates,
+                Y = humidity
+            }
+        };
+        _pressureData = new List<ITrace>
+        {
+            new Scatter
+            {
+                Name = "Pressure",
+                Mode = ModeFlag.Lines | ModeFlag.Markers,
+                Line = new Line {Color = "#37f10f"},
+                X = dates,
+                Y = pressure
+            }
+        };
+        _temperatureData = new List<ITrace>
+        {
+            new Scatter
+            {
+                Name = "Temperature",
+                Mode = ModeFlag.Lines | ModeFlag.Markers,
+                Line = new Line {Color = "#F17e0f"},
+                X = dates,
+                Y = temperature
+            },
+        };
     }
 
 }
