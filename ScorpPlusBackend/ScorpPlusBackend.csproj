@@ -3,13 +3,18 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
-
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+    
     <ItemGroup>
       <PackageReference Include="FlexLabs.EntityFrameworkCore.Upsert" Version="3.1.0" />
       <PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.2.1" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
         <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.14" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
     </ItemGroup>
 
     <ItemGroup>

@@ -15,6 +15,16 @@ namespace ScorpPlus.Contexts
         /// </summary>
         public DbSet<ClimateHistory> ClimateHistories { get; set; }
 
+        /// <summary>
+        /// DbSet for AccurateTemperature model
+        /// </summary>
+        public DbSet<AccurateTemperatureHistory> AccurateTemperatureHistories { get; set; }
+
+        /// <summary>
+        /// DbSet for WaterLevel model
+        /// </summary>
+        public DbSet<WaterLevelHistory> WaterLevelHistories { get; set; }
+
         /// <inheritdoc />
         public ClimateContext(DbContextOptions<ClimateContext> options)
             : base(options)

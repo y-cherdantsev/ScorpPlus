@@ -7,8 +7,8 @@ namespace ScorpPlus.Models
     /// <summary>
     /// Climate table representation
     /// </summary>
-    [Table("climate_history")]
-    public class ClimateHistory
+    [Table("accurate_temperature_history")]
+    public class AccurateTemperatureHistory
     {
         /// <summary>
         /// id field
@@ -22,18 +22,6 @@ namespace ScorpPlus.Models
         /// </summary>
         [Column("temperature")]
         public double Temperature { get; set; }
-
-        /// <summary>
-        /// humidity field
-        /// </summary>
-        [Column("humidity")]
-        public double Humidity { get; set; }
-
-        /// <summary>
-        /// pressure field
-        /// </summary>
-        [Column("pressure")]
-        public double Pressure { get; set; }
 
         /// <summary>
         /// device_id field
