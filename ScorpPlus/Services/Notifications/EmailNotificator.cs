@@ -60,6 +60,13 @@ namespace ScorpPlus.Services.Notifications
                     }
                 },
                 {
+                    NotificationType.EmployeeEnterForbidden, new MailTemplate
+                    {
+                        Topic = "Employee Enter Forbidden",
+                        MessageText = "<b>_MESSAGE</b>"
+                    }
+                },
+                {
                     NotificationType.EmployeeExited, new MailTemplate
                     {
                         Topic = "Employee Exited",

@@ -23,6 +23,7 @@ namespace ScorpPlus.Services.Notifications
         UserAuthorized,
         UserCreated,
         EmployeeEntered,
+        EmployeeEnterForbidden,
         EmployeeExited,
         EmployeeNotInOffice,
         TemperatureIncreasedCritically,

@@ -24,6 +24,7 @@ namespace ScorpPlus.Services.Notifications
             {NotificationType.UserAuthorized, "Topic: User Authorization 🔐;\n_MESSAGE;"},
             {NotificationType.UserCreated, "Topic: User Creation ➕;\n_MESSAGE;"},
             {NotificationType.EmployeeEntered, "Topic: Employee Attendance ➡️🚪;\n_MESSAGE;"},
+            {NotificationType.EmployeeEnterForbidden, "WARNING:  Topic: Employee Attendance ❌;\n_MESSAGE;"},
             {NotificationType.EmployeeExited, "Topic: Employee Attendance ⬅️🚪;\n_MESSAGE;"},
             {NotificationType.EmployeeNotInOffice, "WARNING: Employee Attendance ❌;\n_MESSAGE;"},
             {NotificationType.TemperatureIncreasedCritically, "CRITICALLY: Climate Changes 🌡;\n_MESSAGE;"},

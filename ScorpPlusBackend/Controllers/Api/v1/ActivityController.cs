@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ScorpPlus.Contexts;
 using ScorpPlus.Models;
+using ScorpPlus.Services.Notifications;
 
 namespace ScorpPlusBackend.Controllers.Api.v1
 {
@@ -37,19 +38,26 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         private readonly AccessContext _accessContext;
 
         /// <summary>
+        /// Notification service
+        /// </summary>
+        private readonly NotificationService _notificationService;
+
+        /// <summary>
         /// Event controller constructor
         /// </summary>
         /// <param name="deviceContext">Device context</param>
         /// <param name="climateContext">Climate context</param>
         /// <param name="employeeContext">Employee context</param>
         /// <param name="accessContext">Access context</param>
+        /// <param name="notificationService">Notification service</param>
         public ActivityController(DeviceContext deviceContext, ClimateContext climateContext,
-            EmployeeContext employeeContext, AccessContext accessContext)
+            EmployeeContext employeeContext, AccessContext accessContext, NotificationService notificationService)
         {
             _deviceContext = deviceContext;
             _climateContext = climateContext;
             _employeeContext = employeeContext;
             _accessContext = accessContext;
+            _notificationService = notificationService;
         }
 
         /// <summary>
@@ -170,8 +178,20 @@ namespace ScorpPlusBackend.Controllers.Api.v1
                     Status = statusBool
                 });
                 _accessContext.SaveChanges();
+                var employee = GetEmployee(employeeId);
                 if (hasAccess)
+                {
+                    _notificationService.Notify("admin",
+                        status
+                            ? $"Employee '{employee}' with '{employee.Id}' id has entered {GetDeviceRoom(device.Id).Code} room"
+                            : $"Employee '{employee}' with '{employee.Id}' id has exited {GetDeviceRoom(device.Id).Code} room",
+                        NotificationType.EmployeeEntered);
                     return Ok();
+                }
+
+                _notificationService.Notify("admin",
+                    $"Employee '{employee}' with '{employee.Id}' id forbidden {GetDeviceRoom(device.Id).Code} room",
+                    NotificationType.EmployeeEnterForbidden);
                 return Forbid();
             }
             catch (Exception e)
@@ -200,6 +220,18 @@ namespace ScorpPlusBackend.Controllers.Api.v1
         {
             var device = _deviceContext.Devices.Include(x => x.Room).FirstOrDefault(x => x.Id == deviceId);
             return device?.RoomId ?? 0;
+        }
+
+        private Room GetDeviceRoom(int deviceId)
+        {
+            var device = _deviceContext.Devices.Include(x => x.Room).FirstOrDefault(x => x.Id == deviceId);
+            return device?.Room;
+        }
+
+        private Employee GetEmployee(int employeeId)
+        {
+            var employee = _employeeContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+            return employee;
         }
     }
 }
