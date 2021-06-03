@@ -24,8 +24,6 @@ services:
     ports:
       - "127.0.0.1:5050:5050"
       - "127.0.0.1:5051:5051"
-    volumes:
-      - ~/.aspnet/https:/https:ro
 
   admin_dashboard:
     image: scorp_admin_dashboard
@@ -38,5 +36,3 @@ services:
     ports:
       - "127.0.0.1:5000:5000"
       - "127.0.0.1:5001:5001"
-    volumes:
-      - ~/.aspnet/https:/https:ro
