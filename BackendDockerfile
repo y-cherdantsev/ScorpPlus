@@ -5,9 +5,12 @@ COPY ./ScorpPlus ./ScorpPlus
 COPY ./ScorpPlusBackend ./ScorpPlusBackend
 WORKDIR /app/ScorpPlusBackend
 RUN dotnet publish -c release -r linux-x64 -o out --self-contained=false
+RUN dotnet dev-certs https -ep /https/aspnetapp.pfx -p secret
 
 # Environment for runtime
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+RUN mkdir /https
+COPY --from=build-env /https /https
 WORKDIR /app
 COPY --from=build-env /app/ScorpPlusBackend/out .
 ENTRYPOINT ["dotnet", "ScorpPlusBackend.dll"]
