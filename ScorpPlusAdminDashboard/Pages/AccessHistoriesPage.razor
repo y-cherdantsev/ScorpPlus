@@ -46,7 +46,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _employee = EmployeeContext.Employees.Include(x => x.AccessHistories).ThenInclude(x => x.Device).FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
+        _employee = EmployeeContext.Employees
+            .Include(x => x.AccessHistories)
+            .ThenInclude(x => x.Device)
+            .Include(x => x.AccessHistories)
+            .ThenInclude(x => x.Room)
+            .FirstOrDefault(x => x.Id == int.Parse(EmployeeId));
     }
 
 }

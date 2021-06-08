@@ -73,13 +73,16 @@ namespace ScorpPlusBackend.Controllers.Api.v1
 
             try
             {
+                if (double.Parse(temperature) > 40)
+                    _notificationService.Notify("admin", $"Critical temperature {temperature}°C",
+                        NotificationType.TemperatureIncreasedCritically);
                 _climateContext.ClimateHistories.Add(new ClimateHistory
                 {
                     DeviceId = deviceId,
                     Temperature = double.Parse(temperature),
                     Humidity = double.Parse(humidity),
                     Pressure = double.Parse(pressure),
-                    Relevance = DateTime.Now,
+                    Relevance = DateTime.Now.AddDays(-3).AddHours(12),
                     RoomId = GetDeviceRoomId(deviceId)
                 });
                 _climateContext.SaveChanges();
